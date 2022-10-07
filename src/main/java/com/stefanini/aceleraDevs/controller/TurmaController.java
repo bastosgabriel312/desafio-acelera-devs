@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.stefanini.aceleraDevs.controller.form.TurmaForm;
+import com.stefanini.aceleraDevs.dto.DetalheTurmaDTO;
 import com.stefanini.aceleraDevs.dto.TurmaDTO;
 import com.stefanini.aceleraDevs.exception.CursoNotFoundException;
 import com.stefanini.aceleraDevs.exception.TurmaNotFoundException;
@@ -39,8 +40,9 @@ public class TurmaController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Turma>> listTurma() {
-		return ResponseEntity.ok(turmaService.findAllTurmas());
+	public ResponseEntity<List<TurmaDTO>> listTurma() {
+		List<Turma> turmas = turmaService.findAllTurmas();
+		return ResponseEntity.ok(TurmaDTO.converter(turmas));
 	}
 
 	@PostMapping()
@@ -53,10 +55,10 @@ public class TurmaController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<TurmaDTO> getTurma(@PathVariable Long id) {
+	public ResponseEntity<DetalheTurmaDTO> getTurma(@PathVariable Long id) {
 		try {
 			Turma turma = turmaService.findById(id);
-			return ResponseEntity.ok(new TurmaDTO(turma));
+			return ResponseEntity.ok(new DetalheTurmaDTO(turma));
 
 		} catch (TurmaNotFoundException e) {
 			return ResponseEntity.notFound().build();
