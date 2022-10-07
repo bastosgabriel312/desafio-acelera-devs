@@ -24,7 +24,6 @@ public class AlunoDTOService {
 
 
     public Aluno mapAluno(AlunoDTO aluno) throws TurmaNotFoundException {
-
         Turma turma;
         DadosPessoais dadosPessoais = new DadosPessoais(
                                                     null,

@@ -30,6 +30,9 @@ public class Aluno {
     @JoinColumn(name = "turma_id")
     private Turma turma;
 
+    public Aluno() {
+    	
+    }
     public Aluno(Long id, String nome, String matricula, DadosPessoais dadosPessoais, Turma turma) {
         this.id = id;
         this.nome = nome;
@@ -37,4 +40,24 @@ public class Aluno {
         this.dadosPessoais = dadosPessoais;
         this.turma = turma;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public DadosPessoais getDadosPessoais() {
+		return dadosPessoais;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
 }

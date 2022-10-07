@@ -1,5 +1,7 @@
 package com.stefanini.aceleraDevs.dto;
 
+import com.stefanini.aceleraDevs.model.Aluno;
+
 public class AlunoDTO {
 
     private String nome;
@@ -11,8 +13,16 @@ public class AlunoDTO {
     private String email;
 
     private Long idTurma;
-
+    
     public AlunoDTO() {
+    }
+    
+    public AlunoDTO(Aluno aluno) {
+    	this.nome = aluno.getNome();
+        this.matricula = aluno.getMatricula();
+        this.cpf = aluno.getDadosPessoais().getCpf();
+        this.email = aluno.getDadosPessoais().getEmail();
+        this.idTurma = aluno.getTurma().getId();
     }
 
     public AlunoDTO(String nome, String matricula, String cpf, String email, Long idTurma) {

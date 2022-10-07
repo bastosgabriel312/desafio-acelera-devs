@@ -30,4 +30,9 @@ public class TurmaService {
         return turmaRepository.save(turma);
     }
 
+	public void deleteById(Long id) {
+		turmaRepository.deleteById(id);
+		return;
+	}
+
 }

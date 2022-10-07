@@ -1,21 +1,33 @@
 package com.stefanini.aceleraDevs.dto;
 
+import com.stefanini.aceleraDevs.model.Turma;
+
 public class TurmaDTO {
+	private Long id;
+	private String nome;
 
-    private String nome;
+	public TurmaDTO() {
 
-    public TurmaDTO() {
-    }
+	}
 
-    public TurmaDTO(String nome) {
-        this.nome = nome;
-    }
+	public TurmaDTO(Turma turma) {
+		this.id = turma.getId();
+		this.nome = turma.getNome();
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public TurmaDTO(String nome) {
+		this.nome = nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public Long getId() {
+		return id;
+	}
 }

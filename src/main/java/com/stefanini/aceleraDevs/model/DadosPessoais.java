@@ -19,6 +19,10 @@ public class DadosPessoais {
     private String cpf;
     @Column(nullable = false)
     private String email;
+    
+    public DadosPessoais() {
+    	
+    }
 
     public DadosPessoais(Long id, @CPF String cpf, String email) {
         this.id = id;
@@ -39,5 +43,17 @@ public class DadosPessoais {
     private String estado;
     @Column(nullable = false)
     private String cep;*/
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getEmail() {
+		return email;
+	}
 
 }
