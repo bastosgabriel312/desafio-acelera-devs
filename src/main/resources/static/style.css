@@ -1,0 +1,70 @@
+.navbar-container {
+    grid-row-start: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    list-style-type: none;
+}
+
+.list-style {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #e7e7e7;
+  background-color: #f3f3f3;
+  height: auto;
+}
+
+.list-style2 {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: auto;
+  height: 45px;
+}
+
+.link-style {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  text-decoration: none;
+  color: #000;
+  font-family: arial;
+  text-align: center;
+  width: auto;
+}
+
+.link-style:hover {
+  background-color: #f3f3f3;
+  height: 45px;
+  border-radius: 24px;
+}
+
+#my-form {
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        height: auto;
+}
+
+#my-form2 {
+    display: grid;
+    justify-content: center;
+        align-items: center;
+        width: auto;
+        height: auto;
+}
+
+.disciplina {
+    padding = auto;
+}
+
+.alunoDTO{
+    padding = auto;
+}

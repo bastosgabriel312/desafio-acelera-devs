@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Curso</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <nav class="navbar-container">
+        <ul class="list-style">
+            <li class="list-style2">
+                <a class="link-style" target="_blank" href="/aluno">ALUNO</a>
+            </li>
+            <li class="list-style2">
+                <a class="link-style" href="/curso">CURSO
+                </a>
+            </li>
+            <li class="list-style2">
+                <a class="link-style" href="/disciplina">DISCIPLINA
+                </a>
+            </li>
+            <li class="list-style2">
+                <a class="link-style" href="/turma">TURMA
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <form id="my-form" th:action="@{curso}" th:object="${cursoDTO}" method="post">
+
+        <label>NOME
+            <input id="field-text" th:field="*{name}" class="cursoDTO" type="text">
+        </label>
+        <label>HORAS
+            <input id="field-text2" th:field="*{totalGrade}" class="cursoDTO" type="text">
+        </label>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</head>
+<body>
+
+</body>
+</html>

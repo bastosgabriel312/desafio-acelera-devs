@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Aluno</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <nav class="navbar-container">
+        <ul class="list-style">
+            <li class="list-style2">
+                <a class="link-style" target="_blank" href="/aluno">ALUNO</a>
+            </li>
+            <li class="list-style2">
+                <a class="link-style" href="/curso">CURSO
+                </a>
+            </li>
+            <li class="list-style2">
+                <a class="link-style" href="/disciplina">DISCIPLINA
+                </a>
+            </li>
+            <li class="list-style2">
+                <a class="link-style" href="/turma">TURMA
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <form id="my-form2" th:action="@{aluno}" th:object="${alunoDTO}" method="post">
+
+        <label> Nome Completo
+            <input id="field-text" th:field="*{nome}" class="alunoDTO" type="text">
+        </label>
+        <label> Matricula
+            <input id="field-text2" th:field="*{matricula}" class="alunoDTO" type="text">
+        </label>
+        <label> CPF
+            <input id="field-text3" th:field="*{cpf}" class="alunoDTO" type="text">
+        </label>
+        <label> Email
+            <input id="field-text4" th:field="*{email}" class="alunoDTO" type="text">
+        </label>
+        <label> Turma
+            <input id="field-text5" th:field="*{idTurma}" class="alunoDTO" type="text">
+        </label>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</head>
+<body>
+
+</body>
+</html>
