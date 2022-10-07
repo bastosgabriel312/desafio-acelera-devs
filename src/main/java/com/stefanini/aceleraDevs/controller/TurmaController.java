@@ -46,7 +46,7 @@ public class TurmaController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<TurmaDTO> saveTurma(@RequestBody TurmaDTO turma, UriComponentsBuilder uriBuilder)
+	public ResponseEntity<TurmaDTO> saveTurma(@RequestBody @Valid TurmaDTO turma, UriComponentsBuilder uriBuilder)
 			throws TurmaNotFoundException, CursoNotFoundException {
 		Turma newTurma = turmaDTOService.mapTurma(turma);
 		Turma turmaSaved = turmaService.save(newTurma);
