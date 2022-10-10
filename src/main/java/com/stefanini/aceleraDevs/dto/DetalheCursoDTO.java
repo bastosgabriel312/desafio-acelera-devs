@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import com.stefanini.aceleraDevs.model.Curso;
 import com.stefanini.aceleraDevs.model.Disciplina;
 
-public class CursoDTO {
+public class DetalheCursoDTO {
 	
 	private Long id;
 	
@@ -16,21 +16,24 @@ public class CursoDTO {
     private String name;
 
     private Integer totalGrade;
+    
+    private List<Disciplina> disciplinas;
 
-
-    public CursoDTO() {
+    public DetalheCursoDTO() {
     }
 
-    public CursoDTO(String name, Integer totalGrade,Long id) {
+    public DetalheCursoDTO(String name, Integer totalGrade, List<Disciplina> disciplinas,Long id) {
         this.name = name;
         this.totalGrade = totalGrade;
+        this.disciplinas = disciplinas;
         this.id = id;
     }
 
-    public CursoDTO(Curso curso) {
+    public DetalheCursoDTO(Curso curso) {
     	this.id = curso.getId();
     	this.name = curso.getName();
         this.totalGrade = curso.getTotalGrade();
+        this.disciplinas = curso.getDisciplinas();
 	}
 
 	public Long getId() {
@@ -57,7 +60,15 @@ public class CursoDTO {
         this.totalGrade = totalGrade;
     }
 
-	public static List<CursoDTO> converter(List<Curso> cursos) {
-		return cursos.stream().map(CursoDTO::new).collect(Collectors.toList());
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
+	public static List<DetalheCursoDTO> converter(List<Curso> cursos) {
+		return cursos.stream().map(DetalheCursoDTO::new).collect(Collectors.toList());
 	}
 }

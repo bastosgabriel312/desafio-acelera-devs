@@ -25,9 +25,19 @@ public class CursoService {
         return cursoRepository.findById(id)
                 .orElseThrow(()-> new CursoNotFoundException(id));
     }
-
+    
+    public Curso updateTotalHoras(Integer totalHoras, Curso curso) throws CursoNotFoundException {
+    	curso.setTotalGrade(totalHoras);
+    	cursoRepository.save(curso);
+    	return curso;
+    }
+    
     public Curso save(Curso curso){
         return cursoRepository.save(curso);
     }
 
+	public void deleteById(Long id) throws CursoNotFoundException {
+		Curso curso = findById(id);
+		cursoRepository.delete(curso);	
+	}
 }

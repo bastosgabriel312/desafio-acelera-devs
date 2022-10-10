@@ -9,7 +9,7 @@ import com.stefanini.aceleraDevs.service.TurmaService;
 public class TurmaForm {
 	@NotNull
 	private String nome;
-
+	@NotNull
 	public String getNome() {
 		return nome;
 	}
