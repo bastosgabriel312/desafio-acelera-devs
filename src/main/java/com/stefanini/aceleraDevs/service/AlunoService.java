@@ -11,23 +11,32 @@ import java.util.List;
 
 public class AlunoService {
 
-    private final AlunoRepository alunoRepository;
+	private final AlunoRepository alunoRepository;
 
-    public AlunoService(AlunoRepository alunoRepository) {
-        this.alunoRepository = alunoRepository;
-    }
+	public AlunoService(AlunoRepository alunoRepository) {
+		this.alunoRepository = alunoRepository;
+	}
 
-    public List<Aluno> findAllAlunos(){
-        return alunoRepository.findAll();
-    }
+	public List<Aluno> findAllAlunos() {
+		return alunoRepository.findAll();
+	}
 
-    public Aluno findById(Long id) throws AlunoNotFoundException {
-        return alunoRepository.findById(id)
-                .orElseThrow(()-> new AlunoNotFoundException(id));
-    }
+	public Aluno findById(Long id) throws AlunoNotFoundException {
+		return alunoRepository.findById(id).orElseThrow(() -> new AlunoNotFoundException(id));
+	}
 
-    public Aluno save(Aluno aluno){
-        return alunoRepository.save(aluno);
-    }
+	public Aluno save(Aluno aluno) {
+		return alunoRepository.save(aluno);
+	}
 
+	// Verifica se as disciplinas condizem com o curso que o aluno está matriculado.
+	public void validaDisciplinas() {
+
+	}
+
+	public void deleteById(Long id) throws AlunoNotFoundException {
+		Aluno aluno = findById(id);
+		alunoRepository.delete(aluno);
+		
+	}
 }

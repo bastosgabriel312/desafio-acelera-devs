@@ -60,4 +60,16 @@ public class Aluno {
 	public Turma getTurma() {
 		return turma;
 	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+	public void setDadosPessoais(DadosPessoais dadosPessoais) {
+		this.dadosPessoais = dadosPessoais;
+	}
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
 }

@@ -28,7 +28,10 @@ public class AlunoDTOService {
         DadosPessoais dadosPessoais = new DadosPessoais(
                                                     null,
                                                         aluno.getCpf(),
-                                                        aluno.getEmail());
+                                                        aluno.getEmail(),
+                                                        aluno.getTelefone(),
+                                                        aluno.getRg(),
+                                                        aluno.getEndereco());
         dadosPessoaisService.save(dadosPessoais);
 
         Aluno newAluno = new Aluno(null,

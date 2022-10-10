@@ -1,48 +1,57 @@
 package com.stefanini.aceleraDevs.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
+
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @Data
 public class DadosPessoais {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @CPF
-    private String cpf;
-    @Column(nullable = false)
-    private String email;
-    
-    public DadosPessoais() {
-    	
-    }
+	@CPF
+	private String cpf;
 
-    public DadosPessoais(Long id, @CPF String cpf, String email) {
-        this.id = id;
-        this.cpf = cpf;
-        this.email = email;
-    }
-    /* @Column(nullable = false)
-    private String telefone;
-    @Column(nullable = false)
-    private String rg;
-    @Column(nullable = false)
-    private String rua;
-    @Column(nullable = false)
-    private String numero;
-    @Column(nullable = false)
-    private String cidade;
-    @Column(nullable = false)
-    private String estado;
-    @Column(nullable = false)
-    private String cep;*/
+	@Email
+	@Column(nullable = false)
+	private String email;
+
+	@Column(nullable = false)
+	private String telefone;
+
+	@Column(nullable = false)
+	private String rg;
+
+	@OneToOne(cascade=CascadeType.PERSIST)
+	private Endereco endereco;
+
+	public DadosPessoais() {
+
+	}
+
+	public DadosPessoais(Long id, @CPF String cpf, @Email String email, String telefone, String rg, Endereco endereco) {
+		this.id = id;
+		this.cpf = cpf;
+		this.email = email;
+		this.rg = rg;
+		this.telefone = telefone;
+		this.endereco = endereco;
+
+	}
 
 	public Long getId() {
 		return id;
@@ -54,6 +63,38 @@ public class DadosPessoais {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 }
