@@ -28,7 +28,7 @@ public class Endereco {
     @Column(nullable = false)
     private String cep;
     
-    
+    public Endereco() {}
     
 	public Endereco(Long id, String rua, String numero, String cidade, String estado, String cep) {
 		this.id = id;
