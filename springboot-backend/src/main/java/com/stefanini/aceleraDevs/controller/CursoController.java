@@ -67,7 +67,7 @@ public class CursoController {
 			Curso curso = cursoService.findById(id);
 			return ResponseEntity.ok(new DetalheCursoDTO(curso));
 		} catch (CursoNotFoundException e) {
-			return ResponseEntity.notFound().build();
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -80,7 +80,7 @@ public class CursoController {
 			Curso cursoUpdated = cursoForm.atualizar(id, cursoService);
 			return ResponseEntity.ok(new CursoDTO(cursoUpdated));
 		} catch (CursoNotFoundException e) {
-			return ResponseEntity.notFound().build();
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -93,7 +93,7 @@ public class CursoController {
 			cursoService.deleteById(curso.getId());;
 			return ResponseEntity.ok().build();
 		} catch (CursoNotFoundException e) {
-			return ResponseEntity.notFound().build();
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}

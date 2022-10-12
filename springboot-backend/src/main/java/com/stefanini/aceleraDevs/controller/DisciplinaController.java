@@ -79,7 +79,7 @@ public class DisciplinaController {
 			Disciplina disciplina = disciplinaService.findById(id);
 			return ResponseEntity.ok(new DisciplinaDTO(disciplina));
 		} catch (DisciplinaNotFoundException e) {
-			return ResponseEntity.notFound().build();
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -96,7 +96,7 @@ public class DisciplinaController {
 			cursoService.updateTotalHoras(totalHorasCurso, curso);
 			return ResponseEntity.ok(new DisciplinaDTO(disciplinaUpdated));
 		} catch (DisciplinaNotFoundException e) {
-			return ResponseEntity.notFound().build();
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -113,7 +113,7 @@ public class DisciplinaController {
 			cursoService.updateTotalHoras(totalHorasCurso, curso);
 			return ResponseEntity.ok().build();
 		} catch (DisciplinaNotFoundException e) {
-			return ResponseEntity.notFound().build();
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}

@@ -10,7 +10,7 @@ public class CursoDTOService {
 
      public Curso mapCurso(CursoDTO curso) throws TurmaNotFoundException {
 
-        Curso newCurso = new Curso(null, curso.getName(), null, curso.getTotalGrade());
+        Curso newCurso = new Curso(null, curso.getName(), null, curso.getTotalGrade(),null);
         return newCurso;
     }
 }

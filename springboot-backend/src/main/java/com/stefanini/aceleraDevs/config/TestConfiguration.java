@@ -34,6 +34,11 @@ public class TestConfiguration {
         return args -> {
             Turma turma = new Turma();
             turmaRepository.save(turma);
+            
+            Curso curso = new Curso(null, "medicina",
+                    new ArrayList<Disciplina>(),
+                    370,null);
+            cursoRepository.save(curso);
             DadosPessoais dadosPessoais = new DadosPessoais(null,
                     "156-456-41",
                     "joao@gmail.com",
@@ -45,13 +50,11 @@ public class TestConfiguration {
                     "Joao",
                     "1234567",
                    dadosPessoais,
-                    turma
+                    turma,
+                    curso
             );
             alunoRepository.save(joao);
-            Curso curso = new Curso(null, "medicina",
-                    new ArrayList<Disciplina>(),
-                    370);
-            cursoRepository.save(curso);
+            
             Disciplina disciplina = new Disciplina(null,
                     "Disciplina1",
                     "A045cod",

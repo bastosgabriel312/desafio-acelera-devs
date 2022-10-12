@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
 
 import com.stefanini.aceleraDevs.model.Curso;
-import com.stefanini.aceleraDevs.model.Disciplina;
 
 public class CursoDTO {
 	

@@ -29,16 +29,23 @@ public class Aluno {
     @JsonIgnore
     @JoinColumn(name = "turma_id")
     private Turma turma;
+    
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
+    
 
     public Aluno() {
     	
     }
-    public Aluno(Long id, String nome, String matricula, DadosPessoais dadosPessoais, Turma turma) {
+    public Aluno(Long id, String nome, String matricula, DadosPessoais dadosPessoais, Turma turma, Curso curso) {
         this.id = id;
         this.nome = nome;
         this.matricula = matricula;
         this.dadosPessoais = dadosPessoais;
         this.turma = turma;
+        this.curso = curso;
     }
 
 	public Long getId() {
@@ -72,4 +79,10 @@ public class Aluno {
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
+    public Curso getCurso() {
+        return curso;
+    }
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 }

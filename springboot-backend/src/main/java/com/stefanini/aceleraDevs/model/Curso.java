@@ -19,6 +19,9 @@ public class Curso {
 
     @OneToMany(mappedBy = "curso")
     private List<Disciplina> disciplinas;
+    
+    @OneToMany(mappedBy = "curso")
+    private List<Aluno> alunos;
 
     private Integer totalGrade;
 
@@ -26,11 +29,12 @@ public class Curso {
     	
     }
     
-    public Curso(Long id, String name, List<Disciplina> disciplinas, Integer totalGrade) {
+    public Curso(Long id, String name, List<Disciplina> disciplinas, Integer totalGrade,List<Aluno> alunos) {
         this.id = id;
         this.name = name;
         this.disciplinas = disciplinas;
         this.totalGrade = totalGrade;
+        this.alunos = alunos;
     }
 
 	public Long getId() {
@@ -61,4 +65,12 @@ public class Curso {
 	public void setTotalGrade(Integer totalGrade) {
 		this.totalGrade = totalGrade;
 	}
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
 }
