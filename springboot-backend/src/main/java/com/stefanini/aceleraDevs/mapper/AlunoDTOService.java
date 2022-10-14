@@ -45,8 +45,8 @@ public class AlunoDTOService {
                 aluno.getNome(),
                 aluno.getMatricula(),
                 dadosPessoaisService.save(dadosPessoais),
-                turma = turmaService.findById(aluno.getIdTurma()),
-                curso = cursoService.findById(aluno.getIdCurso()));
+                turma = turmaService.findById(aluno.getCurso().getId()),
+                curso = cursoService.findById(aluno.getTurma().getId()));
         return newAluno;
     }
 }

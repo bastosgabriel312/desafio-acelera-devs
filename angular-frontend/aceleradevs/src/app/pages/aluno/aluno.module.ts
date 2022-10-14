@@ -4,8 +4,11 @@ import { AlunoComponent } from './aluno.component';
 import { TabelaComponent } from './tabela/tabela.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { AppModule } from 'src/app/app.module';
+import { MatSortModule } from '@angular/material/sort'
+import { MatFormField, matFormFieldAnimations, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { AlunoDetalhesComponent } from './aluno-detalhes/aluno-detalhes.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -13,16 +16,21 @@ import { AppModule } from 'src/app/app.module';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    AlunoModule,
-    AppModule
+    MatSelectModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    
   ],
   declarations: [
     AlunoComponent,
-    TabelaComponent
+    TabelaComponent,
+    AlunoDetalhesComponent
   ],
   exports:[
     TabelaComponent,
-    AlunoComponent
-    ]
+    AlunoComponent,
+    AlunoDetalhesComponent
+    ],
+    
 })
 export class AlunoModule { }

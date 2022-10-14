@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Alunos } from 'src/app/shared/model/Aluno';
+import { AlunoService } from 'src/app/shared/services/aluno/aluno.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-aluno',
@@ -6,10 +10,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aluno.component.css']
 })
 export class AlunoComponent implements OnInit {
-
-  constructor() { }
+  alunos!:Alunos;
+  constructor(private alunosService:AlunoService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getAlunos()
+    
   }
+  getAlunos(): void {
+    this.alunosService.getAlunos().pipe().subscribe(
+      (alunos) => {
+        console.log(alunos)
+        this.alunos = alunos;
+      },
+      (error: Error) => {
+        console.error(error);
+      }
+    );
+  }
+
 
 }

@@ -5,8 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.stefanini.aceleraDevs.mapper.AlunoDTOService;
 import com.stefanini.aceleraDevs.model.Aluno;
+import com.stefanini.aceleraDevs.model.Curso;
 import com.stefanini.aceleraDevs.model.Endereco;
+import com.stefanini.aceleraDevs.model.Turma;
 
 public class AlunoDTO {
 
@@ -24,9 +27,9 @@ public class AlunoDTO {
 
     private String rg;
 
-    private Long idTurma;
+    private Turma turma;
 
-    private Long idCurso;
+    private Curso curso;
 
     private Endereco endereco;
 
@@ -39,22 +42,22 @@ public class AlunoDTO {
         this.matricula = aluno.getMatricula();
         this.cpf = aluno.getDadosPessoais().getCpf();
         this.email = aluno.getDadosPessoais().getEmail();
-        this.idTurma = aluno.getTurma().getId();
-        this.idCurso = aluno.getCurso().getId();
+        this.turma = aluno.getTurma();
+        this.curso = aluno.getCurso();
         this.telefone = aluno.getDadosPessoais().getTelefone();
         this.rg = aluno.getDadosPessoais().getRg();
         this.endereco = aluno.getDadosPessoais().getEndereco();
     }
 
     public AlunoDTO(Long id, String nome, String matricula, String cpf, String email, String telefone, String rg,
-            Endereco endereco, Long idTurma, Long idCurso) {
+            Endereco endereco, Turma turma, Curso curso) {
         this.id = id;
         this.nome = nome;
         this.matricula = matricula;
         this.cpf = cpf;
         this.email = email;
-        this.idTurma = idTurma;
-        this.idCurso = idCurso;
+        this.turma = turma;
+        this.curso = curso;
         this.telefone = telefone;
         this.rg = rg;
         this.endereco = endereco;
@@ -101,21 +104,7 @@ public class AlunoDTO {
         this.email = email;
     }
 
-    public Long getIdTurma() {
-        return idTurma;
-    }
-
-    public void setIdTurma(Long idTurma) {
-        this.idTurma = idTurma;
-    }
-
-    public Long getIdCurso() {
-        return idCurso;
-    }
-
-    public void setIdCurso(Long idCurso) {
-        this.idCurso = idCurso;
-    }
+    
 
     public String getTelefone() {
         return telefone;
@@ -131,6 +120,22 @@ public class AlunoDTO {
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+
+    public TurmaDTO getTurma() {
+        return new TurmaDTO(this.turma);
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
+    public CursoDTO getCurso() {
+        return new CursoDTO(this.curso);
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
     public Endereco getEndereco() {
