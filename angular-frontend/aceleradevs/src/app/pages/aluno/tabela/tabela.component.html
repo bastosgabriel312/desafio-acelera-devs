@@ -1,6 +1,7 @@
-<div class="alert alert-danger" role="alert" *ngIf="dataSource==undefined && message.status===0">
+<div class="alert alert-danger" role="alert" *ngIf="dataSource==undefined && message?.status==0">
   Consulta indisponível, tente novamente mais tarde.
 </div>
+<a class="btn btn-success">Cadastrar</a>
 <table mat-table [dataSource]="dataSource" class="mat-elevation" *ngIf="!(dataSource==undefined)">
 
   <!-- Position Column -->
@@ -30,9 +31,9 @@
     <!-- Curso Column -->
     <ng-container matColumnDef="acao">
       <th mat-header-cell *matHeaderCellDef> # </th>
-      <td mat-cell *matCellDef="let element"> <a href="/aluno/{{element.id}}">Detalhes</a> </td>
+      <td mat-cell *matCellDef="let element"> <a class="btn btn-info" routerLink="{{element.id}}" routerLinkActive="router-link-active">Detalhes</a></td>
     </ng-container>
-  
+
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

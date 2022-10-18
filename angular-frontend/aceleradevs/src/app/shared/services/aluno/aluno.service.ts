@@ -23,9 +23,31 @@ export class AlunoService {
     return this.httpClient.get<Aluno>(`${this.API}/aluno/${id}`);
   }
 
-  updateAluno(aluno: Aluno): Observable<Aluno> {
+  convertFormToAluno(formValue:any){
+    let aluno = {
+      nome: formValue.nome,
+      matricula: formValue.matricula,
+      cpf: formValue.cpf,
+      email: formValue.email,
+      idTurma: Number(formValue.turma),
+      idCurso:Number(formValue.curso),
+      telefone:formValue.telefone,
+      rg:formValue.rg,
+      endereco:{
+        rua:formValue.rua,
+        numero:formValue.numero,
+        cidade:formValue.cidade,
+        estado:formValue.estado,
+        cep:formValue.cep
+      }
+    }
+    return aluno;
+  }
+
+  updateAluno(id:number,aluno: any): Observable<Aluno> {
+
     return this.httpClient.put<Aluno>(
-      `${this.API}/aluno/${aluno.id}`,
+      `${this.API}/aluno/${id}`,
       aluno
     );
   }

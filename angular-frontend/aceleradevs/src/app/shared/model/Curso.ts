@@ -3,3 +3,5 @@ export interface Curso {
     name:string;
     totalGrade:number;
 }
+
+export type Cursos = Array<Curso>;

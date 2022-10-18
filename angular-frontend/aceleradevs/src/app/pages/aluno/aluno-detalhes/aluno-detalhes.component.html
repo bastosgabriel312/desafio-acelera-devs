@@ -1,99 +1,159 @@
-  <div class="alert alert-info" role="alert" *ngIf="aluno==undefined && message.status==404">
+<div class="alert alert-info" role="alert" *ngIf="aluno==undefined && message?.status==404">
     {{message.error}}
   </div>
-  <div class="alert alert-danger" role="alert" *ngIf="aluno==undefined && message.status===0">
+  <div class="alert alert-danger" role="alert" *ngIf="aluno==undefined && message?.status===0">
     Consulta indisponível tente novamente mais tarde.
   </div>
-<!--   
-<div class="container border p-5 rounded">
-  <form [formGroup]="editarForm" (ngSubmit)="onSubmit()" method="POST" class="form">
-    <h1> Detalhes do aluno</h1>
+
+<div class="container border p-5 rounded"  *ngIf="!(aluno==undefined)">
+  <form [formGroup]="editarForm" (ngSubmit)="onSubmit()" >
+    <h1 class="display-1">Detalhes do aluno</h1>
+    
     <div class="form-row">
+      <div class="form-group col-md-12 mb-0 pb-0" >
+        <h3 class="subtitle">Dados pessoais </h3>
+      </div>
       <div class="form-group col-md-6">
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" formControlName="nome" class="form-control" required>
+        <mat-form-field appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" maxlength="254" [attr.disabled]="true"/>
+          <mat-error *ngIf="editarForm.get('nome')?.hasError">Insira um nome válido</mat-error>
+        </mat-form-field>
       </div>
-      <div class="form-group col-md-2">
-        <label for="matricula">Matricula</label>
-        <input type="text" id="matricula" formControlName="matricula" class="form-control">
-      </div>
-      <div class="form-group col-md-2">
-        <label for="cpf">CPF</label>
-        <input type="text" id="cpf" formControlName="cpf" class="form-control">
-      </div>
-      <div class="form-group col-md-2">
-        <label for="rg">RG</label>
-        <input type="text" id="rg" formControlName="rg" class="form-control">
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="fill">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email" required />
+          <mat-error *ngIf="editarForm.get('email')?.hasError">Insira um e-mail válido</mat-error>
+        </mat-form-field>
       </div>
       <div class="form-group col-md-3">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" formControlName="email" id="email">
+        <mat-form-field appearance="fill">
+          <mat-label>Matrícula</mat-label>
+          <input matInput formControlName="matricula"/>
+        </mat-form-field>
       </div>
       <div class="form-group col-md-3">
-        <label for="matricula">Telefone</label>
-        <input type="text" id="telefone" formControlName="telefone" class="form-control">
+        <mat-form-field appearance="fill">
+          <mat-label>CPF</mat-label>
+          <input matInput formControlName="cpf" required />
+          <mat-error *ngIf="editarForm.get('cpf')?.hasError">Insira um CPF válido</mat-error>
+        </mat-form-field>
       </div>
       <div class="form-group col-md-3">
-        <label for="curso">Curso</label>
-        <select id="curso" class="form-control" formControlName="curso">
-          <option value="curso 1">curso exemplo</option>
-        </select>
-    </div>
-    <div class="form-group col-md-3">
-      <label for="turma">Turma</label>
-      <select id="turma" class="form-control" formControlName="turma">
-        <option value="turma 1">turma exemplo</option>
-      </select>
-    </div>
-  </div>
-  <div class="form-group">
-      <label for="endereco">Endereço</label>
-      <input type="text" class="form-control" formControlName="endereco" id="endereco">
+        <mat-form-field appearance="fill">
+          <mat-label>RG</mat-label>
+          <input matInput formControlName="rg" required />
+          <mat-error *ngIf="editarForm.get('rg')?.hasError">Insira um RG válido</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group col-md-3">
+        <mat-form-field appearance="fill">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="telefone" required />
+          <mat-error *ngIf="editarForm.get('telefone')?.hasError">Insira um telefone válido</mat-error>
+        </mat-form-field>
+      </div>
+      </div>
+      <div class="form-row justify-content-end">        
+        
+        <div class="form-group col-md-6">  
+          <mat-form-field appearance="fill">
+            <mat-label>Curso</mat-label>
+            <mat-select [(ngModel)]="aluno.curso.id" formControlName="curso" >
+              <mat-option *ngFor="let cursoOption of cursos" [value]="cursoOption.id">{{cursoOption.name}}</mat-option>
+            </mat-select>
+            <mat-hint align="end">Selecione um curso.</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Turma</mat-label>
+            <mat-select [(ngModel)]="aluno.turma.id" formControlName="turma">
+              <mat-option *ngFor="let turmaOption of turmas" [value]="turmaOption.id" >{{turmaOption.nome}}</mat-option>
+            </mat-select>
+            <mat-hint align="end">Selecione uma turma</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
       
-  </div>
-  <div class="form-row">
-      <div class="form-group col-md-6">
-          <label for="cidade">Cidade</label>
-          <input type="text" class="form-control" formControlName="cidade" id="cidade">
+    <div class="form-row">
+      <div class="form-group col-md-12 mb-0 pb-0" >
+        <h3 class="display-4">Endereço</h3>
       </div>
       <div class="form-group col-md-2">
-          <label for="cep">CEP</label>
-          <input type="text" class="form-control" formControlName="cep" id="cep">
+        <mat-form-field appearance="fill">
+          <mat-label>Logradouro</mat-label>
+          <input matInput formControlName="rua" required />
+          <mat-error *ngIf="editarForm.get('rua')?.hasError">Insira um endereço válido</mat-error>
+        </mat-form-field>
       </div>
-      <div class="form-group col-md-4">
-          <label for="estado">Estado</label>
-          <select id="estado" class="form-control" formControlName="estado">
-              <option selected hidden>Escolha...</option>
-              <option value="AC">Acre</option>
-              <option value="AL">Alagoas</option>
-              <option value="AP">Amapá</option>
-              <option value="AM">Amazonas</option>
-              <option value="BA">Bahia</option>
-              <option value="CE">Ceará</option>
-              <option value="DF">Distrito Federal</option>
-              <option value="ES">Espírito Santo</option>
-              <option value="GO">Goiás</option>
-              <option value="MA">Maranhão</option>
-              <option value="MT">Mato Grosso</option>
-              <option value="MS">Mato Grosso do Sul</option>
-              <option value="MG">Minas Gerais</option>
-              <option value="PA">Pará</option>
-              <option value="PB">Paraíba</option>
-              <option value="PR">Paraná</option>
-              <option value="PE">Pernambuco</option>
-              <option value="PI">Piauí</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="RN">Rio Grande do Norte</option>
-              <option value="RS">Rio Grande do Sul</option>
-              <option value="RO">Rondônia</option>
-              <option value="RR">Roraima</option>
-              <option value="SC">Santa Catarina</option>
-              <option value="SP">São Paulo</option>
-              <option value="SE">Sergipe</option>
-              <option value="TO">Tocantins</option>
-          </select>
+      <div class="form-group col-md-1">
+        <mat-form-field appearance="fill">
+          <mat-label>Numero</mat-label>
+          <input matInput formControlName="numero" required />
+          <mat-error *ngIf="editarForm.get('numero')?.hasError">Insira um endereço válido</mat-error>
+        </mat-form-field>
       </div>
-  </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+    
+      <div class="form-group col-md-3">
+        <mat-form-field appearance="fill">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="cidade" required />
+          <mat-error *ngIf="editarForm.get('cidade')?.hasError">Insira uma cidade válida</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-3">
+        <mat-form-field appearance="fill">
+          <mat-label>CEP</mat-label>
+          <input matInput formControlName="cep" required />
+          <mat-error *ngIf="editarForm.get('cep')?.hasError">Insira um cep válido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-3">
+        <mat-form-field appearance="fill">
+          <mat-label>Estado</mat-label>
+          <mat-select [(value)]="aluno.endereco.estado" formControlName="estado">
+            <mat-option value="AC">Acre</mat-option>
+            <mat-option value="AL">Alagoas</mat-option>
+            <mat-option value="AP">Amapá</mat-option>
+            <mat-option value="AM">Amazonas</mat-option>
+            <mat-option value="BA">Bahia</mat-option>
+            <mat-option value="CE">Ceará</mat-option>
+            <mat-option value="DF">Distrito Federal</mat-option>
+            <mat-option value="ES">Espírito Santo</mat-option>
+            <mat-option value="GO">Goiás</mat-option>
+            <mat-option value="MA">Maranhão</mat-option>
+            <mat-option value="MT">Mato Grosso</mat-option>
+            <mat-option value="MS">Mato Grosso do Sul</mat-option>
+            <mat-option value="MG">Minas Gerais</mat-option>
+            <mat-option value="PA">Pará</mat-option>
+            <mat-option value="PB">Paraíba</mat-option>
+            <mat-option value="PR">Paraná</mat-option>
+            <mat-option value="PE">Pernambuco</mat-option>
+            <mat-option value="PI">Piauí</mat-option>
+            <mat-option value="RJ">Rio de Janeiro</mat-option>
+            <mat-option value="RN">Rio Grande do Norte</mat-option>
+            <mat-option value="RS">Rio Grande do Sul</mat-option>
+            <mat-option value="RO">Rondônia</mat-option>
+            <mat-option value="RR">Roraima</mat-option>
+            <mat-option value="SC">Santa Catarina</mat-option>
+            <mat-option value="SP">São Paulo</mat-option>
+            <mat-option value="SE">Sergipe</mat-option>
+            <mat-option value="TO">Tocantins</mat-option>
+          </mat-select>
+          <mat-hint align="end">Selecione o estado</mat-hint>
+        </mat-form-field>
+
+      </div>
+    </div>
+    <div class="form-row">
+      <a class="btn btn-danger mr-2">Remover</a>
+      <button *ngIf="editarForm.enabled" type="submit" class="btn btn-primary">Salvar</button>
+      <a class="btn btn-success mr-2" *ngIf="editarForm.disabled" (click)="this.habilitarForm()">Editar</a>
+      
+    </div>
+    
   </form>
-</div> -->
+</div>

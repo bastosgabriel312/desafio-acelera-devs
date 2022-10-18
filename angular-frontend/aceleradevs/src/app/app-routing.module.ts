@@ -4,11 +4,15 @@ import { AlunoDetalhesComponent } from './pages/aluno/aluno-detalhes/aluno-detal
 import { AlunoComponent } from './pages/aluno/aluno.component';
 
 const routes: Routes = [
-  { path: 'aluno', component: AlunoComponent },
-  {path: 'aluno/:id', component: AlunoDetalhesComponent}];
+  {
+    path: 'aluno',
+    component: AlunoComponent
+  },
+  { path: 'aluno/:id', component: AlunoDetalhesComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

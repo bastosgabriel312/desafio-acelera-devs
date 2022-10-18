@@ -1,10 +1,16 @@
 package com.stefanini.aceleraDevs.model;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -72,5 +78,9 @@ public class Curso {
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
+    }
+    
+    public void addAluno(Aluno aluno) {
+        this.alunos.add(aluno);
     }
 }

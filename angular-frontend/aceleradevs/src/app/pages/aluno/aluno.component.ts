@@ -20,7 +20,6 @@ export class AlunoComponent implements OnInit {
   getAlunos(): void {
     this.alunosService.getAlunos().pipe().subscribe(
       (alunos) => {
-        console.log(alunos)
         this.alunos = alunos;
       },
       (error: Error) => {

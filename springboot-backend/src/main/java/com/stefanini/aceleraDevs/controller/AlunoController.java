@@ -28,6 +28,7 @@ import com.stefanini.aceleraDevs.exception.TurmaNotFoundException;
 import com.stefanini.aceleraDevs.mapper.AlunoDTOService;
 import com.stefanini.aceleraDevs.model.Aluno;
 import com.stefanini.aceleraDevs.service.AlunoService;
+import com.stefanini.aceleraDevs.service.CursoService;
 import com.stefanini.aceleraDevs.service.TurmaService;
 
 @RestController
@@ -37,12 +38,13 @@ public class AlunoController {
     private final AlunoService alunoService;
     private final AlunoDTOService alunoDTOService;
     private final TurmaService turmaService;
-
+    private final CursoService cursoService;
     @Autowired
-    public AlunoController(AlunoService alunoService, AlunoDTOService alunoDTOService, TurmaService turmaService) {
+    public AlunoController(AlunoService alunoService, AlunoDTOService alunoDTOService, TurmaService turmaService, CursoService cursoService) {
         this.alunoService = alunoService;
         this.alunoDTOService = alunoDTOService;
         this.turmaService = turmaService;
+        this.cursoService = cursoService;
     }
 
 	@GetMapping
@@ -87,7 +89,7 @@ public class AlunoController {
 	public ResponseEntity<?> updateAluno(@PathVariable Long id, @RequestBody @Valid AlunoForm alunoForm)
 			throws CursoNotFoundException, DisciplinaNotFoundException, AlunoNotFoundException {
 		try {
-			Aluno alunoUpdated = alunoForm.atualizar(id, alunoService, turmaService);
+			Aluno alunoUpdated = alunoForm.atualizar(id, alunoService, turmaService,cursoService);
 			return ResponseEntity.ok(new AlunoDTO(alunoUpdated));
 		} catch (AlunoNotFoundException e) {
 		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

@@ -12,35 +12,24 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AlunoModule } from './pages/aluno/aluno.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-
-
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-
-  ],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AlunoModule,
     HttpClientModule,
-    
-    TooltipModule.forRoot(),
-    CollapseModule.forRoot(),
+
+    TooltipModule,
+    CollapseModule,
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
   ],
-  providers: [HttpClient,
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}
-  ],
-  
-  bootstrap: [AppComponent]
+
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
