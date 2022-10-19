@@ -11,6 +11,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { AlunoDetalhesComponent } from './aluno-detalhes/aluno-detalhes.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { FormModalComponent } from './aluno-cadastro/form-modal/form-modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -24,16 +26,19 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     RouterModule,
     MatInputModule,
+    ModalModule
   ],
   declarations: [
     AlunoComponent,
     TabelaComponent,
-    AlunoDetalhesComponent
+    AlunoDetalhesComponent,
+    FormModalComponent
   ],
   exports:[
     TabelaComponent,
     AlunoComponent,
-    AlunoDetalhesComponent
+    AlunoDetalhesComponent,
+    FormModalComponent
     ],
 
 })

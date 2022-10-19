@@ -1,7 +1,7 @@
 <div class="alert alert-danger" role="alert" *ngIf="dataSource==undefined && message?.status==0">
   Consulta indisponível, tente novamente mais tarde.
 </div>
-<a class="btn btn-success">Cadastrar</a>
+<form-modal></form-modal>
 <table mat-table [dataSource]="dataSource" class="mat-elevation" *ngIf="!(dataSource==undefined)">
 
   <!-- Position Column -->

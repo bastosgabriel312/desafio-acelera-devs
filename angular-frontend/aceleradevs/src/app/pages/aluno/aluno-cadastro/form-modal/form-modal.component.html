@@ -1,0 +1,174 @@
+<button type="button" class="btn btn-success" (click)="openModal(template)">Cadastrar</button>
+
+<ng-template #template class="modal-lg">
+  <div class="modal-header">
+     <h1 class="modal-title pull-left">Cadastrar aluno</h1>
+     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true">×</span>
+     </button>
+  </div>
+  <div class="modal-body">
+  <div class="alert alert-info" role="alert" *ngIf="message?.status==404">
+      {{message.error}}
+   </div>
+    <div class="alert alert-danger" role="alert" *ngIf="message?.status===0">
+      Consulta indisponível tente novamente mais tarde.
+    </div>
+  
+   <!--  FORM  -->
+  <div class="container r p-5"  >
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+      <div class="form-row">
+        <div class="form-group col-md-12 mb-0 pb-0" >
+          <h3 class="subtitle">Dados pessoais </h3>
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" maxlength="254" required/>
+            <mat-error *ngIf="form.get('nome')?.hasError">Insira um nome válido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" maxlength="254" required />
+            <mat-error *ngIf="form.get('email')?.hasError">Insira um e-mail válido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Matrícula</mat-label>
+            <input matInput formControlName="matricula"/>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>CPF</mat-label>
+            <input matInput formControlName="cpf" required />
+            <mat-error *ngIf="form.get('cpf')?.hasError">Insira um CPF válido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>RG</mat-label>
+            <input matInput formControlName="rg" required />
+            <mat-error *ngIf="form.get('rg')?.hasError">Insira um RG válido</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div class="form-group col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="telefone" required />
+            <mat-error *ngIf="form.get('telefone')?.hasError">Insira um telefone válido</mat-error>
+          </mat-form-field>
+        </div>
+        </div>
+        <div class="form-row justify-content-end">        
+          
+          <div class="form-group col-md-6">  
+            <mat-form-field appearance="fill">
+              <mat-label>Curso</mat-label>
+              <mat-select formControlName="curso" >
+                <mat-option *ngFor="let cursoOption of cursos" [value]="cursoOption.id">{{cursoOption.name}}</mat-option>
+              </mat-select>
+              <mat-hint align="end">Selecione um curso.</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Turma</mat-label>
+              <mat-select formControlName="turma">
+                <mat-option *ngFor="let turmaOption of turmas" [value]="turmaOption.id" >{{turmaOption.nome}}</mat-option>
+              </mat-select>
+              <mat-hint align="end">Selecione uma turma</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        
+      <div class="form-row">
+        <div class="form-group col-md-12 mb-0 pb-0" >
+          <h3 class="display-4">Endereço</h3>
+        </div>
+        <div class="form-group col-md-2">
+          <mat-form-field appearance="fill">
+            <mat-label>Logradouro</mat-label>
+            <input matInput formControlName="rua" required />
+            <mat-error *ngIf="form.get('rua')?.hasError">Insira um endereço válido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-1">
+          <mat-form-field appearance="fill">
+            <mat-label>Numero</mat-label>
+            <input matInput formControlName="numero" required />
+            <mat-error *ngIf="form.get('numero')?.hasError">Insira um endereço válido</mat-error>
+          </mat-form-field>
+        </div>
+      
+        <div class="form-group col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Cidade</mat-label>
+            <input matInput formControlName="cidade" required />
+            <mat-error *ngIf="form.get('cidade')?.hasError">Insira uma cidade válida</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>CEP</mat-label>
+            <input matInput formControlName="cep" required />
+            <mat-error *ngIf="form.get('cep')?.hasError">Insira um cep válido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado">
+              <mat-option value="AC">Acre</mat-option>
+              <mat-option value="AL">Alagoas</mat-option>
+              <mat-option value="AP">Amapá</mat-option>
+              <mat-option value="AM">Amazonas</mat-option>
+              <mat-option value="BA">Bahia</mat-option>
+              <mat-option value="CE">Ceará</mat-option>
+              <mat-option value="DF">Distrito Federal</mat-option>
+              <mat-option value="ES">Espírito Santo</mat-option>
+              <mat-option value="GO">Goiás</mat-option>
+              <mat-option value="MA">Maranhão</mat-option>
+              <mat-option value="MT">Mato Grosso</mat-option>
+              <mat-option value="MS">Mato Grosso do Sul</mat-option>
+              <mat-option value="MG">Minas Gerais</mat-option>
+              <mat-option value="PA">Pará</mat-option>
+              <mat-option value="PB">Paraíba</mat-option>
+              <mat-option value="PR">Paraná</mat-option>
+              <mat-option value="PE">Pernambuco</mat-option>
+              <mat-option value="PI">Piauí</mat-option>
+              <mat-option value="RJ">Rio de Janeiro</mat-option>
+              <mat-option value="RN">Rio Grande do Norte</mat-option>
+              <mat-option value="RS">Rio Grande do Sul</mat-option>
+              <mat-option value="RO">Rondônia</mat-option>
+              <mat-option value="RR">Roraima</mat-option>
+              <mat-option value="SC">Santa Catarina</mat-option>
+              <mat-option value="SP">São Paulo</mat-option>
+              <mat-option value="SE">Sergipe</mat-option>
+              <mat-option value="TO">Tocantins</mat-option>
+            </mat-select>
+            <mat-hint align="end">Selecione o estado</mat-hint>
+          </mat-form-field>
+  
+        </div>
+      </div>
+      <div class="form-row">
+        
+      </div>
+      
+    </form>
+  </div>
+  <!-- END FORM  -->
+
+    
+  </div>
+  <div class="modal-footer">
+     <button type="button" class="btn btn-danger" (click)="modalRef?.hide()">Fechar</button>
+     <button type="submit" class="btn btn-primary">Salvar</button>
+  </div>
+</ng-template>

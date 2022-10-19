@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Turmas } from 'src/app/shared/model/Turma';
 import { Cursos } from 'src/app/shared/model/Curso';
+import { AlertService, AlertTypes } from 'src/app/shared/services/alert/alert.service';
 
 @Component({
   selector: 'app-aluno-detalhes',
@@ -27,6 +28,7 @@ export class AlunoDetalhesComponent implements OnInit {
     private turmaService: TurmaService,
     private cursoService: CursoService,
     private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -115,15 +117,14 @@ export class AlunoDetalhesComponent implements OnInit {
    if(this.editarForm.valid){
    this.alunosService.updateAluno(this.aluno.id,this.alunosService.convertFormToAluno(this.editarForm.value)).subscribe(
       (aluno) =>{
-        console.log(aluno);
-        alert("Aluno salvo com sucesso")
+        this.alertService.showAlert("Aluno salvo com sucesso",
+        AlertTypes.SUCCESS)
       },
       (error: Error) => {
         this.message = error;
-        console.log(this.editarForm.value);
         this.alunosService.convertFormToAluno(this.editarForm.value)
-        alert(this.message.error);
-        console.log(this.message);
+        this.alertService.showAlert(this.message.error,
+          AlertTypes.DANGER);
       });
     }
   }

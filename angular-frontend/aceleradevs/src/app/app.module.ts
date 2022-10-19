@@ -13,6 +13,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AlunoModule } from './pages/aluno/aluno.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -21,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     AlunoModule,
     HttpClientModule,
+    ModalModule.forRoot(),
 
     TooltipModule,
     CollapseModule,

@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, TemplateRef} from '@angular/core';
 import { Aluno,Alunos } from 'src/app/shared/model/Aluno';
 import { AlunoService } from 'src/app/shared/services/aluno/aluno.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 
 @Component({
@@ -12,11 +13,10 @@ import { MatTableDataSource } from '@angular/material/table';
 export class TabelaComponent {
 
     displayedColumns: string[] = ['matricula', 'nome', 'turma', 'curso','acao'];
-
-
     dataSource!:any;
     message!:any;
-    constructor(private alunosService:AlunoService) { }
+    
+    constructor(private alunosService:AlunoService,) { }
 
     ngOnInit() {
       this.getAlunos()
@@ -39,5 +39,6 @@ export class TabelaComponent {
         }
       );
     }
+
 
   }

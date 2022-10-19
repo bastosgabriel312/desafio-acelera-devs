@@ -16,34 +16,34 @@
       <div class="form-group col-md-6">
         <mat-form-field appearance="fill">
           <mat-label>Nome</mat-label>
-          <input matInput formControlName="nome" maxlength="254" [attr.disabled]="true"/>
+          <input matInput formControlName="nome" maxlength="254" required/>
           <mat-error *ngIf="editarForm.get('nome')?.hasError">Insira um nome válido</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group col-md-6">
         <mat-form-field appearance="fill">
           <mat-label>E-mail</mat-label>
-          <input matInput formControlName="email" required />
+          <input matInput formControlName="email" maxlength="254" required />
           <mat-error *ngIf="editarForm.get('email')?.hasError">Insira um e-mail válido</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>Matrícula</mat-label>
-          <input matInput formControlName="matricula"/>
+          <input matInput formControlName="matricula" maxlength="254" required/>
         </mat-form-field>
       </div>
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>CPF</mat-label>
-          <input matInput formControlName="cpf" required />
+          <input matInput formControlName="cpf" maxlength="254" required />
           <mat-error *ngIf="editarForm.get('cpf')?.hasError">Insira um CPF válido</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>RG</mat-label>
-          <input matInput formControlName="rg" required />
+          <input matInput formControlName="rg" maxlength="254" required />
           <mat-error *ngIf="editarForm.get('rg')?.hasError">Insira um RG válido</mat-error>
         </mat-form-field>
       </div>
@@ -51,7 +51,7 @@
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>Telefone</mat-label>
-          <input matInput formControlName="telefone" required />
+          <input matInput formControlName="telefone" maxlength="254" required />
           <mat-error *ngIf="editarForm.get('telefone')?.hasError">Insira um telefone válido</mat-error>
         </mat-form-field>
       </div>
@@ -85,14 +85,14 @@
       <div class="form-group col-md-2">
         <mat-form-field appearance="fill">
           <mat-label>Logradouro</mat-label>
-          <input matInput formControlName="rua" required />
+          <input matInput formControlName="rua" maxlength="254" required />
           <mat-error *ngIf="editarForm.get('rua')?.hasError">Insira um endereço válido</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group col-md-1">
         <mat-form-field appearance="fill">
           <mat-label>Numero</mat-label>
-          <input matInput formControlName="numero" required />
+          <input matInput formControlName="numero" maxlength="254" required />
           <mat-error *ngIf="editarForm.get('numero')?.hasError">Insira um endereço válido</mat-error>
         </mat-form-field>
       </div>
@@ -100,14 +100,14 @@
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>Cidade</mat-label>
-          <input matInput formControlName="cidade" required />
+          <input matInput formControlName="cidade" maxlength="254" required />
           <mat-error *ngIf="editarForm.get('cidade')?.hasError">Insira uma cidade válida</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>CEP</mat-label>
-          <input matInput formControlName="cep" required />
+          <input matInput formControlName="cep" maxlength="254" required />
           <mat-error *ngIf="editarForm.get('cep')?.hasError">Insira um cep válido</mat-error>
         </mat-form-field>
       </div>
