@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
+import com.stefanini.aceleraDevs.model.Curso;
 import com.stefanini.aceleraDevs.model.Disciplina;
+import com.stefanini.aceleraDevs.model.Turma;
 
 public class DisciplinaDTO {
 	
@@ -24,9 +26,9 @@ public class DisciplinaDTO {
 
 	private Integer totalHoras;
 
-	private Long turma;
+	private Turma turma;
 
-	private Long curso;
+	private Curso curso;
 
 	public DisciplinaDTO() {
 
@@ -39,12 +41,12 @@ public class DisciplinaDTO {
 		this.conteudoProgramatico = disciplina.getConteudoProgramatico();
 		this.numeroCreditos = disciplina.getNumeroCreditos();
 		this.totalHoras = disciplina.getTotalHoras();
-		this.curso = disciplina.getCurso().getId();
-		this.turma = disciplina.getTurma().getId();
+		this.curso = disciplina.getCurso();
+		this.turma = disciplina.getTurma();
 	}
 
 	public DisciplinaDTO(String nome, String codigo, String conteudoProgramatico, Integer numeroCreditos,
-			Integer totalHoras, Long turma, Long curso, Long id) {
+			Integer totalHoras, Turma turma, Curso curso, Long id) {
 		this.id = id;
 		this.nome = nome;
 		this.codigo = codigo;
@@ -95,19 +97,19 @@ public class DisciplinaDTO {
 		this.totalHoras = totalHoras;
 	}
 
-	public Long getTurma() {
+	public Turma getTurma() {
 		return turma;
 	}
 
-	public void setTurma(Long turma) {
+	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
 
-	public Long getCurso() {
+	public Curso getCurso() {
 		return curso;
 	}
 
-	public void setCurso(Long curso) {
+	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
 

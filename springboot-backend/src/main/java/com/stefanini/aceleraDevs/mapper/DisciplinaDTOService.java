@@ -1,6 +1,9 @@
 package com.stefanini.aceleraDevs.mapper;
 
-import com.stefanini.aceleraDevs.dto.DisciplinaDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.stefanini.aceleraDevs.controller.form.DisciplinaForm;
 import com.stefanini.aceleraDevs.exception.CursoNotFoundException;
 import com.stefanini.aceleraDevs.exception.TurmaNotFoundException;
 import com.stefanini.aceleraDevs.model.Curso;
@@ -8,8 +11,6 @@ import com.stefanini.aceleraDevs.model.Disciplina;
 import com.stefanini.aceleraDevs.model.Turma;
 import com.stefanini.aceleraDevs.service.CursoService;
 import com.stefanini.aceleraDevs.service.TurmaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class DisciplinaDTOService {
@@ -24,7 +25,7 @@ public class DisciplinaDTOService {
     }
 
 
-    public Disciplina mapDisciplina(DisciplinaDTO disciplina) throws TurmaNotFoundException, CursoNotFoundException {
+    public Disciplina mapDisciplina(DisciplinaForm disciplina) throws TurmaNotFoundException, CursoNotFoundException {
 
         Turma turma = turmaService.findById(disciplina.getTurma());
         Curso curso = cursoService.findById(disciplina.getCurso());

@@ -14,6 +14,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { AlunoModule } from './pages/aluno/aluno.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { DisciplinaModule } from './pages/disciplina/disciplina.module';
+import { TurmaModule } from './pages/turma/turma.module';
+import { CursoModule } from './pages/curso/Curso.module';
 
 
 @NgModule({
@@ -22,6 +25,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserModule,
     AppRoutingModule,
     AlunoModule,
+    DisciplinaModule,
+    TurmaModule,
+    CursoModule,
     HttpClientModule,
     ModalModule.forRoot(),
 

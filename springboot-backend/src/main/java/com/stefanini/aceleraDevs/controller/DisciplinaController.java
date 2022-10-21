@@ -58,7 +58,7 @@ public class DisciplinaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> saveDisciplina(@RequestBody @Validated DisciplinaDTO disciplina,
+	public ResponseEntity<?> saveDisciplina(@RequestBody @Validated DisciplinaForm disciplina,
 			UriComponentsBuilder uriBuilder) throws TurmaNotFoundException, CursoNotFoundException {
 		try {
 			Disciplina newDisciplina = disciplinaDTOService.mapDisciplina(disciplina);
