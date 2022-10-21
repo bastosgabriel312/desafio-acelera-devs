@@ -103,7 +103,7 @@ export class AlunoDetalhesComponent implements OnInit {
     email: ['', [Validators.email]],
     cpf: ['', [Validators.pattern(this.patternCpf)]],
     rg: ['', [Validators.pattern(this.patternRg)]],
-    telefone: ['', [Validators.pattern(this.patternCpf)]],
+    telefone: ['', [Validators.pattern(this.patternTelefone)]],
     rua: ['', [Validators.required]],
     numero:['', [Validators.required]],
     estado: ['', [Validators.required]],
@@ -128,4 +128,22 @@ export class AlunoDetalhesComponent implements OnInit {
       });
     }
   }
+
+  deleteAluno(){
+    if(confirm("Confirme caso deseje realmente remover")){
+      this.alunosService.deleteAluno(this.aluno.id).subscribe(
+        (mensagem:any) =>{
+          console.warn(mensagem);
+          this.alertService.showAlert("Aluno removido com sucesso",
+          AlertTypes.SUCCESS)
+          this.router.navigate(['/aluno'])
+        },
+        (error: Error) => {
+          this.message = error;
+          this.alertService.showAlert(this.message.error,
+            AlertTypes.DANGER);
+        });
+      }
+    }
+  
 }

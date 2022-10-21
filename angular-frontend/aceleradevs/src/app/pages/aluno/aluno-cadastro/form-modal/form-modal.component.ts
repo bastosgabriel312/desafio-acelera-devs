@@ -1,12 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Aluno } from 'src/app/shared/model/Aluno';
 import { Cursos } from 'src/app/shared/model/Curso';
 import { Turmas } from 'src/app/shared/model/Turma';
-import { AlertService } from 'src/app/shared/services/alert/alert.service';
+import { AlertService, AlertTypes } from 'src/app/shared/services/alert/alert.service';
 import { AlunoService } from 'src/app/shared/services/aluno/aluno.service';
 import { CursoService } from 'src/app/shared/services/curso/curso.service';
 import { TurmaService } from 'src/app/shared/services/turma/turma.service';
+import { TabelaComponent } from '../../tabela/tabela.component';
+
 
 @Component({
   selector: 'form-modal',
@@ -18,10 +22,12 @@ export class FormModalComponent implements OnInit {
   turmas?:Turmas;
   cursos?:Cursos;
   message: any;
+  @Output() callParent = new EventEmitter<any>();
+
 
   constructor(
     private modalService: BsModalService,
-    alunoService: AlunoService,
+    private alunoService: AlunoService,
     private turmaService: TurmaService,
     private cursoService: CursoService,
     private formBuilder: FormBuilder,
@@ -29,7 +35,7 @@ export class FormModalComponent implements OnInit {
 
   ngOnInit() {
     this.getCursos();
-    this.getTurmas()
+    this.getTurmas();
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class:'modal-xl'});
@@ -55,8 +61,26 @@ export class FormModalComponent implements OnInit {
     }
 
   onSubmit(){
-    console.log("salvo!")
-  }
+    if(this.form.valid){
+      this.alunoService.createAluno(this.alunoService.convertFormToAluno(this.form.value)).subscribe(
+        (aluno) =>{
+          this.alertService.showAlert("Aluno salvo com sucesso",
+          AlertTypes.SUCCESS);
+          this.modalRef?.hide();
+          this.callParent.emit();
+          
+
+        },
+        (error: Error) => {
+          this.message = error;
+          console.warn(this.message);
+          
+          this.alertService.showAlert(this.message.error,
+            AlertTypes.DANGER);
+        });
+      }
+    }
+      
 
   patternNome = "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$";
   patternCpf = "^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$";
@@ -71,7 +95,7 @@ export class FormModalComponent implements OnInit {
   email: ['', [Validators.email]],
   cpf: ['', [Validators.pattern(this.patternCpf)]],
   rg: ['', [Validators.pattern(this.patternRg)]],
-  telefone: ['', [Validators.pattern(this.patternCpf)]],
+  telefone: ['', [Validators.pattern(this.patternTelefone)]],
   rua: ['', [Validators.required]],
   numero:['', [Validators.required]],
   estado: ['', [Validators.required]],

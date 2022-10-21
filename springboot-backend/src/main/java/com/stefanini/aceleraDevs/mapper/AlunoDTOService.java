@@ -3,6 +3,7 @@ package com.stefanini.aceleraDevs.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.stefanini.aceleraDevs.controller.form.AlunoForm;
 import com.stefanini.aceleraDevs.dto.AlunoDTO;
 import com.stefanini.aceleraDevs.exception.CursoNotFoundException;
 import com.stefanini.aceleraDevs.exception.TurmaNotFoundException;
@@ -29,7 +30,7 @@ public class AlunoDTOService {
         this.cursoService = cursoService;
     }
 
-    public Aluno mapAluno(AlunoDTO aluno) throws TurmaNotFoundException, CursoNotFoundException {
+    public Aluno mapAluno(AlunoForm aluno) throws TurmaNotFoundException, CursoNotFoundException {
         Turma turma;
         Curso curso;
         DadosPessoais dadosPessoais = new DadosPessoais(
@@ -40,13 +41,13 @@ public class AlunoDTOService {
                 aluno.getRg(),
                 aluno.getEndereco());
         dadosPessoaisService.save(dadosPessoais);
-
         Aluno newAluno = new Aluno(null,
                 aluno.getNome(),
                 aluno.getMatricula(),
                 dadosPessoaisService.save(dadosPessoais),
-                turma = turmaService.findById(aluno.getCurso().getId()),
-                curso = cursoService.findById(aluno.getTurma().getId()));
+                turma = turmaService.findById(aluno.getIdTurma()),
+                curso = cursoService.findById(aluno.getIdCurso()));
+        System.out.println(aluno.toString());
         return newAluno;
     }
 }

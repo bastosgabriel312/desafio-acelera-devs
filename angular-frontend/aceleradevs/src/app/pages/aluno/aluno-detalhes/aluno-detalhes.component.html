@@ -52,6 +52,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Telefone</mat-label>
           <input matInput formControlName="telefone" maxlength="254" required />
+          <mat-hint align="end">Exemplo: 11 998765432 ou 11 87654321</mat-hint>
           <mat-error *ngIf="editarForm.get('telefone')?.hasError">Insira um telefone válido</mat-error>
         </mat-form-field>
       </div>
@@ -93,7 +94,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Numero</mat-label>
           <input matInput formControlName="numero" maxlength="254" required />
-          <mat-error *ngIf="editarForm.get('numero')?.hasError">Insira um endereço válido</mat-error>
+          <mat-error *ngIf="editarForm.get('numero')?.hasError">Insira um número válido</mat-error>
         </mat-form-field>
       </div>
     
@@ -149,7 +150,7 @@
       </div>
     </div>
     <div class="form-row">
-      <a class="btn btn-danger mr-2">Remover</a>
+      <a class="btn btn-danger mr-2" (click)="this.deleteAluno()">Remover</a>
       <button *ngIf="editarForm.enabled" type="submit" class="btn btn-primary">Salvar</button>
       <a class="btn btn-success mr-2" *ngIf="editarForm.disabled" (click)="this.habilitarForm()">Editar</a>
       

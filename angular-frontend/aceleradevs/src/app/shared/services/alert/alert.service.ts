@@ -25,5 +25,7 @@ export class AlertService {
     bsModalRef.content.type = type;
     bsModalRef.content.mensagem = mensagem;
   }
+
+
   
 }

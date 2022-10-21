@@ -39,75 +39,78 @@ public class AlunoController {
     private final AlunoDTOService alunoDTOService;
     private final TurmaService turmaService;
     private final CursoService cursoService;
+
     @Autowired
-    public AlunoController(AlunoService alunoService, AlunoDTOService alunoDTOService, TurmaService turmaService, CursoService cursoService) {
+    public AlunoController(AlunoService alunoService, AlunoDTOService alunoDTOService, TurmaService turmaService,
+            CursoService cursoService) {
         this.alunoService = alunoService;
         this.alunoDTOService = alunoDTOService;
         this.turmaService = turmaService;
         this.cursoService = cursoService;
     }
 
-	@GetMapping
-	public ResponseEntity<List<AlunoDTO>> listAluno() {
-		List<Aluno> alunos = alunoService.findAllAlunos();
-		return ResponseEntity.ok(AlunoDTO.converter(alunos));
-	}
+    @GetMapping
+    public ResponseEntity<List<AlunoDTO>> listAluno() {
+        List<Aluno> alunos = alunoService.findAllAlunos();
+        return ResponseEntity.ok(AlunoDTO.converter(alunos));
+    }
 
     @PostMapping
-    public ResponseEntity<?> saveAluno(@RequestBody AlunoDTO aluno, UriComponentsBuilder uriBuilder) throws TurmaNotFoundException, CursoNotFoundException {
+    public ResponseEntity<?> saveAluno(@RequestBody AlunoForm aluno, UriComponentsBuilder uriBuilder)
+            throws TurmaNotFoundException, CursoNotFoundException {
         try {
-        	Aluno newAluno = alunoDTOService.mapAluno(aluno);
-        	
-        	if (!AlunoDTO.isValidDadosPessoais(newAluno)) 
-        	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dados pessoais inválidos.");
-        	if (!alunoService.disciplinasInCurso(newAluno)) 
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("As disciplinas da turma do aluno não condizem com as disciplinas do curso");
-            
+            Aluno newAluno = alunoDTOService.mapAluno(aluno);
+
+            if (!AlunoDTO.isValidDadosPessoais(newAluno))
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dados pessoais inválidos.");
+            if (!alunoService.disciplinasInCurso(newAluno))
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("As disciplinas da turma do aluno não condizem com as disciplinas do curso");
+
             Aluno alunoSaved = alunoService.save(newAluno);
             URI uri = uriBuilder.path("/aluno/{id}").buildAndExpand(alunoSaved.getId()).toUri();
-    		return ResponseEntity.created(uri).body(new AlunoDTO(alunoSaved));
-            } catch (ConstraintViolationException e) {
-            	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dados pessoais inválidos");
-    		} catch (Exception e) {
-    		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    		}
+            return ResponseEntity.created(uri).body(new AlunoDTO(alunoSaved));
+        } catch (ConstraintViolationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dados pessoais inválidos");
+        } 
     }
-    
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getAluno(@PathVariable Long id) {
-		try {
-			Aluno aluno = alunoService.findById(id);
-			return ResponseEntity.ok(new AlunoDTO(aluno));
-		} catch (AlunoNotFoundException e) {
-		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
-	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<?> updateAluno(@PathVariable Long id, @RequestBody @Valid AlunoForm alunoForm)
-			throws CursoNotFoundException, DisciplinaNotFoundException, AlunoNotFoundException {
-		try {
-			Aluno alunoUpdated = alunoForm.atualizar(id, alunoService, turmaService,cursoService);
-			return ResponseEntity.ok(new AlunoDTO(alunoUpdated));
-		} catch (AlunoNotFoundException e) {
-		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
-	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> remover(@PathVariable Long id) {
-		try {
-			Aluno aluno = alunoService.findById(id);
-			alunoService.deleteById(aluno.getId());;
-			return ResponseEntity.ok().build();
-		} catch (AlunoNotFoundException e) {
-		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
-	}
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAluno(@PathVariable Long id) {
+        try {
+            Aluno aluno = alunoService.findById(id);
+            return ResponseEntity.ok(new AlunoDTO(aluno));
+        } catch (AlunoNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateAluno(@PathVariable Long id, @RequestBody @Valid AlunoForm alunoForm)
+            throws CursoNotFoundException, DisciplinaNotFoundException, AlunoNotFoundException {
+        try {
+            Aluno alunoUpdated = alunoForm.atualizar(id, alunoService, turmaService, cursoService);
+            return ResponseEntity.ok(new AlunoDTO(alunoUpdated));
+        } catch (AlunoNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        try {
+            Aluno aluno = alunoService.findById(id);
+            alunoService.deleteById(aluno.getId());
+            ;
+            return ResponseEntity.ok().build();
+        } catch (AlunoNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 }

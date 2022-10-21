@@ -61,6 +61,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Telefone</mat-label>
             <input matInput formControlName="telefone" required />
+            <mat-hint align="end">Exemplo: 11 998765432 ou 11 87654321</mat-hint>
             <mat-error *ngIf="form.get('telefone')?.hasError">Insira um telefone válido</mat-error>
           </mat-form-field>
         </div>
@@ -102,7 +103,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Numero</mat-label>
             <input matInput formControlName="numero" required />
-            <mat-error *ngIf="form.get('numero')?.hasError">Insira um endereço válido</mat-error>
+            <mat-error *ngIf="form.get('numero')?.hasError">Insira um número válido</mat-error>
           </mat-form-field>
         </div>
       
@@ -123,7 +124,7 @@
         <div class="form-group col-md-3">
           <mat-form-field appearance="fill">
             <mat-label>Estado</mat-label>
-            <mat-select formControlName="estado">
+            <mat-select matNativeControl formControlName="estado">
               <mat-option value="AC">Acre</mat-option>
               <mat-option value="AL">Alagoas</mat-option>
               <mat-option value="AP">Amapá</mat-option>
@@ -169,6 +170,6 @@
   </div>
   <div class="modal-footer">
      <button type="button" class="btn btn-danger" (click)="modalRef?.hide()">Fechar</button>
-     <button type="submit" class="btn btn-primary">Salvar</button>
+     <button type="submit" class="btn btn-primary" (click)="onSubmit()"> Salvar</button>
   </div>
 </ng-template>

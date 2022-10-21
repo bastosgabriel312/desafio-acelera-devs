@@ -23,8 +23,11 @@ export class TabelaComponent {
       
 
     }
-
-    getAlunos(): void {
+    onCallParent(){
+      this.getAlunos();
+    }
+    
+    public getAlunos(): void {
       this.alunosService.getAlunos().pipe().subscribe(
         (alunos) => {
           this.message = {

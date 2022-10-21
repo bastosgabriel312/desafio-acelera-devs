@@ -44,6 +44,13 @@ export class AlunoService {
     return aluno;
   }
 
+  createAluno(aluno: any): Observable<Aluno> {
+    return this.httpClient.post<any>(
+      `${this.API}/aluno`,
+      aluno
+    );
+  }
+
   updateAluno(id:number,aluno: any): Observable<Aluno> {
 
     return this.httpClient.put<Aluno>(
@@ -52,8 +59,8 @@ export class AlunoService {
     );
   }
 
-  deletarAluno(aluno: Aluno): any {
+  deleteAluno(idAluno: number): any {
     return this.httpClient
-      .delete<Aluno>(`${this.API}/aluno/${aluno.id}`);
+      .delete<Aluno>(`${this.API}/aluno/${idAluno}`);
   }
 }

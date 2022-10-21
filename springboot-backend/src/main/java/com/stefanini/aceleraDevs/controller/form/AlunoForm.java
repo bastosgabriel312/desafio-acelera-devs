@@ -107,4 +107,11 @@ public class AlunoForm {
 	}
 	
 	
+	@Override
+    public String toString() {
+        return "AlunoForm [nome=" + nome + ", matricula=" + matricula + ", cpf=" + cpf + ", email=" + email
+                + ", telefone=" + telefone + ", rg=" + rg + ", idTurma=" + idTurma + ", idCurso=" + idCurso
+                + ", endereco=" + endereco + "]";
+    }
+	
 }
