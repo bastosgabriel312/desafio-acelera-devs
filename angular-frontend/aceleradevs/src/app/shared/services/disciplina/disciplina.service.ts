@@ -40,5 +40,18 @@ export class DisciplinaService {
       return this.httpClient
         .delete<Disciplina>(`${this.API}/disciplina/${idDisciplina}`);
     }
+
+    convertFormToDisciplina(formValue:any){
+      let disciplina = {
+        nome: formValue.nome,
+        codigo: formValue.codigo,
+        conteudoProgramatico: formValue.conteudoProgramatico,
+        totalHoras: formValue.totalHoras,
+        numeroCreditos: formValue.numeroCreditos,
+        idTurma: Number(formValue.turma),
+        idCurso:Number(formValue.curso),
+      }
+      return disciplina;
+    }
   }
 

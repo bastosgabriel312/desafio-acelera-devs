@@ -1,3 +1,81 @@
-<p>
-  disciplina-detalhes works!
-</p>
+<div class="alert alert-info" role="alert" *ngIf="disciplina==undefined && message?.status==404">
+  {{message.error}}
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="disciplina==undefined && message?.status===0">
+  Consulta indisponível tente novamente mais tarde.
+</div>
+
+<div class="container border p-5 rounded"  *ngIf="!(disciplina==undefined)">
+<form [formGroup]="editarForm" (ngSubmit)="onSubmit()" >
+  <h1 class="display-1">Detalhes da disciplina</h1>
+  
+  <div class="form-row">
+    <div class="form-group col-md-12 mb-0 pb-0" >
+      <h3 class="subtitle">Dados pessoais </h3>
+    </div>
+    <div class="form-group col-md-6">
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" maxlength="254" required/>
+        <mat-error *ngIf="editarForm.get('nome')?.hasError">Insira um nome válido</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-3">
+      <mat-form-field appearance="fill">
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="codigo" maxlength="254" required/>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-3">
+      <mat-form-field appearance="fill">
+        <mat-label>Conteúdo programático</mat-label>
+        <input matInput formControlName="conteudoProgramatico" maxlength="254" required />
+        <mat-error *ngIf="editarForm.get('conteudoProgramatico')?.hasError">Insira um conteúdo programático válido</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group col-md-3">
+      <mat-form-field appearance="fill">
+        <mat-label>Número de créditos</mat-label>
+        <input type="number" formControlName="numeroCreditos" maxlength="254" min=0 required />
+        <mat-error *ngIf="editarForm.get('numeroCreditos')?.hasError">Insira um número de créditos válido</mat-error>
+      </mat-form-field>
+    </div>
+    </div>
+    <div class="form-row justify-content-end">        
+      <div class="form-group col-md-3">
+        <mat-form-field appearance="fill">
+          <mat-label>Total horas</mat-label>
+          <input matInput formControlName="totalHoras" min="1" required />
+          <mat-error *ngIf="editarForm.get('totalHoras')?.hasError">Insira um número total de horas válido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6">  
+        <mat-form-field appearance="fill">
+          <mat-label>Curso</mat-label>
+          <mat-select [(ngModel)]="disciplina.curso.id" formControlName="curso" >
+            <mat-option *ngFor="let cursoOption of cursos" [value]="cursoOption.id">{{cursoOption.name}}</mat-option>
+          </mat-select>
+          <mat-hint align="end">Selecione um curso.</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Turma</mat-label>
+          <mat-select [(ngModel)]="disciplina.turma.id" formControlName="turma">
+            <mat-option *ngFor="let turmaOption of turmas" [value]="turmaOption.id" >{{turmaOption.nome}}</mat-option>
+          </mat-select>
+          <mat-hint align="end">Selecione uma turma</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    
+  <div class="form-row">
+    <a class="btn btn-danger mr-2" (click)="this.deleteAluno()">Remover</a>
+    <button *ngIf="editarForm.enabled" type="submit" class="btn btn-primary">Salvar</button>
+    <a class="btn btn-success mr-2" *ngIf="editarForm.disabled" (click)="this.habilitarForm()">Editar</a>
+    
+  </div>
+  
+</form>
+</div>

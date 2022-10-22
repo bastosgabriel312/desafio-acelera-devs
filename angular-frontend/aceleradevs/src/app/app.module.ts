@@ -17,6 +17,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { DisciplinaModule } from './pages/disciplina/disciplina.module';
 import { TurmaModule } from './pages/turma/turma.module';
 import { CursoModule } from './pages/curso/Curso.module';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({

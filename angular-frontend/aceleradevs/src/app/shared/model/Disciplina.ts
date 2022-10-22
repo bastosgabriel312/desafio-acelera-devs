@@ -1,12 +1,15 @@
+import { Curso } from "./Curso";
+import { Turma } from "./Turma";
+
 export interface Disciplina {
     id: number;
-    nome:number;
-    codigo: number;
-    conteudoProgramatico: number;
+    nome:string;
+    codigo: string;
+    conteudoProgramatico: string;
     numeroCreditos: number;
     totalHoras: number;
-    turma: number;
-    curso: number;
+    turma: Turma;
+    curso: Curso;
     
 }
 
