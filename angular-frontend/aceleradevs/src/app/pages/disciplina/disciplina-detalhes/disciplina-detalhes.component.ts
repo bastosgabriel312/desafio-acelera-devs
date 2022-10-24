@@ -96,6 +96,7 @@ export class DisciplinaDetalhesComponent implements OnInit {
   });
 
   onSubmit(): void {
+    console.log(this.editarForm.value)
    if(this.editarForm.valid){
    this.disciplinasService.updateDisciplina(this.disciplina.id,this.disciplinasService.convertFormToDisciplina(this.editarForm.value)).subscribe(
       (aluno) =>{
@@ -122,6 +123,7 @@ export class DisciplinaDetalhesComponent implements OnInit {
         },
         (error: Error) => {
           this.message = error;
+          console.log(this.editarForm);
           this.alertService.showAlert(this.message.error,
             AlertTypes.DANGER);
         });

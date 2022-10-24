@@ -48,8 +48,8 @@ export class DisciplinaService {
         conteudoProgramatico: formValue.conteudoProgramatico,
         totalHoras: formValue.totalHoras,
         numeroCreditos: formValue.numeroCreditos,
-        idTurma: Number(formValue.turma),
-        idCurso:Number(formValue.curso),
+        turma: formValue.turma,
+        curso:formValue.curso,
       }
       return disciplina;
     }

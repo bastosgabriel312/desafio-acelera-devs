@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormModalComponent } from './form-modal/form-modal.component';
 
 @NgModule({
   imports: [
@@ -30,12 +31,14 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     DisciplinaComponent,
     TabelaComponent,
     DisciplinaDetalhesComponent,
+    FormModalComponent
     
   ],
   exports:[
     TabelaComponent,
     DisciplinaComponent,
     DisciplinaDetalhesComponent,
+    FormModalComponent
     
     ],
 

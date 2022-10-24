@@ -1,0 +1,90 @@
+<button type="button" class="btn btn-success" (click)="openModal(template)">Cadastrar</button>
+
+<ng-template #template class="modal-lg">
+  <div class="modal-header">
+     <h1 class="modal-title pull-left">Cadastrar disciplina</h1>
+     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true">×</span>
+     </button>
+  </div>
+  <div class="modal-body">
+  <div class="alert alert-info" role="alert" *ngIf="message?.status==404">
+      {{message.error}}
+   </div>
+    <div class="alert alert-danger" role="alert" *ngIf="message?.status===0">
+      Consulta indisponível tente novamente mais tarde.
+    </div>
+  
+   <!--  FORM  -->
+  <div class="container r p-5"  >
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+      <div class="form-row">
+        <div class="form-group col-md-12 mb-0 pb-0" >
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" maxlength="254" required/>
+            <mat-error *ngIf="form.get('nome')?.hasError">Insira um nome válido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-2">
+          <mat-form-field appearance="fill">
+            <mat-label>Código</mat-label>
+            <input matInput formControlName="codigo" maxlength="254" required/>
+            <mat-error *ngIf="form.get('codigo')?.hasError">Insira um código válido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-2">
+          <mat-form-field appearance="fill">
+            <mat-label>Número de créditos</mat-label>
+            <input matInput type="number" formControlName="numeroCreditos" maxlength="254" min=0 required />
+            <mat-error *ngIf="form.get('numeroCreditos')?.hasError">Insira um número de créditos válido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-2">
+          <mat-form-field appearance="fill">
+            <mat-label>Total horas</mat-label>
+            <input matInput type="number" formControlName="totalHoras" min="1" required />
+            <mat-error *ngIf="form.get('totalHoras')?.hasError">Insira um número total de horas válido</mat-error>
+          </mat-form-field>
+        </div>
+        </div>
+        <div class="form-row justify-content-end">    
+          <div class="form-group col-md-3">  
+            <mat-form-field appearance="fill">
+              <mat-label>Curso</mat-label>
+              <mat-select formControlName="curso" >
+                <mat-option *ngFor="let cursoOption of cursos" [value]="cursoOption.id">{{cursoOption.name}}</mat-option>
+              </mat-select>
+              <mat-hint align="end">Selecione um curso.</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="fill">
+              <mat-label>Turma</mat-label>
+              <mat-select formControlName="turma">
+                <mat-option *ngFor="let turmaOption of turmas" [value]="turmaOption.id" >{{turmaOption.nome}}</mat-option>
+              </mat-select>
+              <mat-hint align="end">Selecione uma turma</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Conteúdo programático</mat-label>
+              <textarea matInput formControlName="conteudoProgramatico" maxlength="254" required></textarea>
+              <mat-error *ngIf="form.get('conteudoProgramatico')?.hasError">Insira um conteúdo programático válido</mat-error>
+            </mat-form-field>
+          </div>    
+        </div>
+    </form>
+  </div>
+  <!-- END FORM  -->
+
+    
+  </div>
+  <div class="modal-footer">
+     <button type="button" class="btn btn-danger" (click)="modalRef?.hide()">Fechar</button>
+     <button type="submit" class="btn btn-primary" (click)="onSubmit()"> Salvar</button>
+  </div>
+</ng-template>
