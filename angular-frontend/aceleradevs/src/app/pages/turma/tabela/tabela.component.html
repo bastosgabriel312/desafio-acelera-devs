@@ -1,0 +1,23 @@
+<div class="alert alert-danger" role="alert" *ngIf="dataSource==undefined && message?.status==0">
+  Consulta indisponível, tente novamente mais tarde.
+</div>
+<!-- <form-modal (callParent)="onCallParent()"></form-modal> -->
+<div class="container justify-content-between">
+<table mat-table [dataSource]="dataSource" class="mat-elevation" *ngIf="!(dataSource==undefined)">
+
+  <!-- Nome Column -->
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef> Nome </th>
+    <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+  </ng-container>
+    <!-- Acao Column -->
+    <ng-container matColumnDef="acao">
+      <th mat-header-cell *matHeaderCellDef class="acao"> # </th>
+      <td mat-cell *matCellDef="let element" class="acao"> <a class="btn btn-info" routerLink="{{element.id}}" routerLinkActive="router-link-active">Detalhes</a></td>
+    </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>

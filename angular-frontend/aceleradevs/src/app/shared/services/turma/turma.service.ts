@@ -31,8 +31,15 @@ export class TurmaService {
     );
   }
 
-  deletarTurma(id: number): any {
+  deleteTurma(id: number): any {
     return this.httpClient
       .delete<Turma>(`${this.API}/turma/${id}`);
+  }
+
+  convertFormToTurma(formValue:any){
+    let turma = {
+      nome: formValue.nome
+    }
+    return turma;
   }
 }

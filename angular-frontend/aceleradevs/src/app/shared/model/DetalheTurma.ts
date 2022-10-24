@@ -5,5 +5,5 @@ export interface DetalheTurma {
     id: number;
     nome:string;
     alunos:Alunos;
-    disciplina: Disciplinas;
+    disciplinas: Disciplinas;
 }

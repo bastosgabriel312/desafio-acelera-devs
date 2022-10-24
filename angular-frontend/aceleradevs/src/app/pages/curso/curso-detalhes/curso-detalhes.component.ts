@@ -68,7 +68,7 @@ export class CursoDetalhesComponent implements OnInit {
       if(this.editarForm.valid){
         this.editarForm.enable();
         this.cursoService.updateCurso(this.curso.id,this.cursoService.convertFormToCurso(this.editarForm.value)).subscribe(
-           (aluno) =>{
+           (curso) =>{
              this.alertService.showAlert("Curso salvo com sucesso",
              AlertTypes.SUCCESS)
              this.editarForm.disable();

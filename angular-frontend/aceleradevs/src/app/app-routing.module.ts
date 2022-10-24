@@ -6,6 +6,7 @@ import { CursoDetalhesComponent } from './pages/curso/curso-detalhes/curso-detal
 import { CursoComponent } from './pages/curso/Curso.component';
 import { DisciplinaDetalhesComponent } from './pages/disciplina/disciplina-detalhes/disciplina-detalhes.component';
 import { DisciplinaComponent } from './pages/disciplina/disciplina.component';
+import { TurmaDetalhesComponent } from './pages/turma/turma-detalhes/turma-detalhes.component';
 import { TurmaComponent } from './pages/turma/turma.component';
 
 const routes: Routes = [
@@ -29,6 +30,8 @@ const routes: Routes = [
   },
   {
     path: 'turma', component: TurmaComponent   
+  },{
+    path: 'turma/:id', component: TurmaDetalhesComponent   
   },
 ];
 

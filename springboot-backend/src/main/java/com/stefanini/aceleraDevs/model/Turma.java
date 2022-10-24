@@ -17,6 +17,9 @@ public class Turma {
 
     @OneToMany(mappedBy = "turma")
     private List<Disciplina> disciplinas;
+    
+    private boolean enabled = true;
+
 
     public Turma(Long id, String nome, List<Aluno> alunos, List<Disciplina> disciplinas) {
         this.id = id;
@@ -63,4 +66,13 @@ public class Turma {
     public void setDisciplinas(List<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
     }
+    
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
 }
