@@ -3,7 +3,6 @@ package com.stefanini.aceleraDevs.model;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +28,7 @@ public class Curso {
     @OneToMany(mappedBy = "curso")
     private List<Aluno> alunos;
 
-    private Integer totalGrade;
+    private Integer totalGrade = 0;;
 
     public Curso() {
     	
@@ -52,7 +51,6 @@ public class Curso {
 	}
 
 	public List<Disciplina> getDisciplinas() {
-		System.out.println("ABC" + disciplinas);
 		return disciplinas;
 	}
 

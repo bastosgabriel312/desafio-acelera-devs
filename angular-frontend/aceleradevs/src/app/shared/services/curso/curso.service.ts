@@ -35,4 +35,12 @@ export class CursoService {
     return this.httpClient
       .delete<DetalheCurso>(`${this.API}/curso/${id}`);
   }
+
+  convertFormToCurso(formValue:any){
+    let curso = {
+      name: formValue.nome,
+      totalGrade: formValue.totalGrade,
+    }
+    return curso;
+  }
 }

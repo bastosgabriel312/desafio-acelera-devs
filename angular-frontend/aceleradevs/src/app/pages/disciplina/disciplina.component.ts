@@ -5,7 +5,7 @@ import { Disciplina, Disciplinas } from 'src/app/shared/model/Disciplina';
 import { DisciplinaService } from 'src/app/shared/services/disciplina/disciplina.service';
 
 @Component({
-  selector: 'app-aluno',
+  selector: 'app-disciplina',
   templateUrl: './disciplina.component.html',
   styleUrls: ['./disciplina.component.css']
 })

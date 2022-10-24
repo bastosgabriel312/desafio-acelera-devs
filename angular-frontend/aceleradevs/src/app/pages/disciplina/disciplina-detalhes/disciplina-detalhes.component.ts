@@ -51,8 +51,7 @@ export class DisciplinaDetalhesComponent implements OnInit {
           totalHoras: disciplina.numeroCreditos,
           turma: String(disciplina.turma.id),
           curso: String(disciplina.curso.id),
-        })
-        ;
+        });
 
       },
       (error: Error) => {
@@ -96,7 +95,6 @@ export class DisciplinaDetalhesComponent implements OnInit {
   });
 
   onSubmit(): void {
-    console.log(this.editarForm.value)
    if(this.editarForm.valid){
    this.disciplinasService.updateDisciplina(this.disciplina.id,this.disciplinasService.convertFormToDisciplina(this.editarForm.value)).subscribe(
       (aluno) =>{
@@ -112,7 +110,7 @@ export class DisciplinaDetalhesComponent implements OnInit {
     }
   }
 
-  deleteAluno(){
+  deleteDisciplina(){
     if(confirm("Confirme caso deseje realmente remover")){
       this.disciplinasService.deleteDisciplina(this.disciplina.id).subscribe(
         (mensagem:any) =>{

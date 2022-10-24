@@ -1,0 +1,68 @@
+<div class="alert alert-info" role="alert" *ngIf="curso==undefined && message?.status==404">
+  {{message.error}}
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="curso==undefined && message?.status===0">
+  Consulta indisponível tente novamente mais tarde.
+</div>
+
+<div class="container border p-5 rounded"  *ngIf="!(curso==undefined)">
+<form [formGroup]="editarForm" (ngSubmit)="onSubmit()" >
+  <h1 class="display-1">Detalhes do curso</h1>
+  
+  <div class="form-row">
+    <div class="form-group col-md-12 mb-0 pb-0" >
+    </div>
+    <div class="form-group col-md-8">
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" maxlength="254" required/>
+        <mat-error *ngIf="editarForm.get('nome')?.hasError">Insira um nome válido</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group col-md-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Total horas da grade</mat-label>
+        <input matInput type="number" formControlName="totalGrade" min="1" required />
+        <mat-error *ngIf="editarForm.get('totalHoras')?.hasError">Insira um número total de horas válido</mat-error>
+        <mat-hint align="end">Este valor é calculado conforme o total de horas das disciplinas do curso.</mat-hint>
+      </mat-form-field>
+    </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Disciplinas
+            </mat-panel-title>
+            <mat-panel-description>
+            detalhes das disciplinas do curso
+            </mat-panel-description>
+            </mat-expansion-panel-header>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Total Horas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr mat-list-item  routerLink="/disciplina/{{disciplina.id}}" *ngFor="let disciplina of curso.disciplinas">
+                  <td>{{ disciplina.nome }}</td>
+                  <td> {{disciplina.totalHoras}}</td>
+                </tr>
+              </tbody>
+            
+            </table>
+          </mat-expansion-panel>
+      </mat-accordion>
+      </div>
+    </div>
+  <div class="form-row">
+    <a class="btn btn-danger mr-2" (click)="this.deleteCurso()">Remover</a>
+    <button *ngIf="editarForm.enabled" type="submit" class="btn btn-primary">Salvar</button>
+    <a class="btn btn-success mr-2" *ngIf="editarForm.disabled" (click)="this.habilitarForm()">Editar</a>
+  </div>
+</form>
+</div>

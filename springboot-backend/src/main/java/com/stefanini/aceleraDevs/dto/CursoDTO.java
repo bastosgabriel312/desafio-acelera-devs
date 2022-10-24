@@ -13,7 +13,7 @@ public class CursoDTO {
 	
 	@NotNull
     private String name;
-
+	@NotNull
     private Integer totalGrade;
 
 
