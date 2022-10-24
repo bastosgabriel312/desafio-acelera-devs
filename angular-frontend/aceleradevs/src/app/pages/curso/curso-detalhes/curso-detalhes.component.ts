@@ -87,7 +87,19 @@ export class CursoDetalhesComponent implements OnInit {
  
    deleteCurso(){
      if(confirm("Confirme caso deseje realmente remover")){
-       console.log("Excluída!")
+       this.cursoService.deleteCurso(this.curso.id).subscribe(
+        (mensagem:any) =>{
+          console.warn(mensagem);
+          this.alertService.showAlert("Curso removido com sucesso",
+          AlertTypes.SUCCESS)
+          this.router.navigate(['/curso'])
+        },
+        (error: Error) => {
+          this.message = error;
+          console.log(this.editarForm);
+          this.alertService.showAlert(this.message.error,
+            AlertTypes.DANGER);
+        });
        }
      }
 

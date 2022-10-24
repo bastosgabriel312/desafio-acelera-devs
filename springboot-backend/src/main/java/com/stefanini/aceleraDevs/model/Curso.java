@@ -28,7 +28,9 @@ public class Curso {
     @OneToMany(mappedBy = "curso")
     private List<Aluno> alunos;
 
-    private Integer totalGrade = 0;;
+    private Integer totalGrade = 0;
+    
+    private boolean enabled = true;
 
     public Curso() {
     	
@@ -80,5 +82,13 @@ public class Curso {
     
     public void addAluno(Aluno aluno) {
         this.alunos.add(aluno);
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

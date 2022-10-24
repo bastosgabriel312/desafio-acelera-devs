@@ -31,7 +31,7 @@ export class CursoService {
     );
   }
 
-  deletarCurso(id: number): any {
+  deleteCurso(id: number): any {
     return this.httpClient
       .delete<DetalheCurso>(`${this.API}/curso/${id}`);
   }

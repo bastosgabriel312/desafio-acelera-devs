@@ -6,6 +6,7 @@ import com.stefanini.aceleraDevs.repository.CursoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
@@ -18,12 +19,16 @@ public class CursoService {
     }
 
     public List<Curso> findAllCursos(){
-        return cursoRepository.findAll();
+        return cursoRepository.findAllByEnabled(true);
     }
 
     public Curso findById(Long id) throws CursoNotFoundException {
-        return cursoRepository.findById(id)
-                .orElseThrow(()-> new CursoNotFoundException(id));
+        Optional<Curso> curso = cursoRepository.findById(id);
+        if(!curso.isEmpty()) {
+            if(curso.get().isEnabled())
+                return curso.get();
+        }
+        throw new CursoNotFoundException(id);
     }
     
     public Curso updateTotalHoras(Integer totalHoras, Curso curso) throws CursoNotFoundException {
@@ -38,6 +43,8 @@ public class CursoService {
 
 	public void deleteById(Long id) throws CursoNotFoundException {
 		Curso curso = findById(id);
-		cursoRepository.delete(curso);	
+		curso.setEnabled(false);
+		curso.setName(curso.getName()+" [DESABILITADO]");
+		cursoRepository.save(curso);	
 	}
 }
