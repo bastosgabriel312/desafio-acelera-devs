@@ -24,6 +24,13 @@ export class CursoService {
     return this.httpClient.get<DetalheCurso>(`${this.API}/curso/${id}`);
   }
 
+  createCurso(curso: any): Observable<Curso> {
+    return this.httpClient.post<any>(
+      `${this.API}/curso`,
+      curso
+    );
+  }
+
   updateCurso(id:number,curso: any): Observable<DetalheCurso> {
     return this.httpClient.put<DetalheCurso>(
       `${this.API}/curso/${id}`,

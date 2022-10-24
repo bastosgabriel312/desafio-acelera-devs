@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CursoDetalhesComponent } from './curso-detalhes/curso-detalhes.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
+import { FormModalComponent } from './form-modal/form-modal.component';
 
 @NgModule({
   imports: [
@@ -33,12 +34,14 @@ import {MatListModule} from '@angular/material/list';
   declarations: [
     TabelaComponent,
     CursoComponent,
-    CursoDetalhesComponent
+    CursoDetalhesComponent,
+    FormModalComponent
   ],
   exports:[
     TabelaComponent,
     CursoComponent,
-    CursoDetalhesComponent
+    CursoDetalhesComponent,
+    FormModalComponent
     ]
 })
 export class CursoModule { }

@@ -48,7 +48,7 @@ export class DisciplinaDetalhesComponent implements OnInit {
           codigo: disciplina.codigo,
           conteudoProgramatico: disciplina.conteudoProgramatico,
           numeroCreditos: disciplina.numeroCreditos,
-          totalHoras: disciplina.numeroCreditos,
+          totalHoras: disciplina.totalHoras,
           turma: String(disciplina.turma.id),
           curso: String(disciplina.curso.id),
         });
