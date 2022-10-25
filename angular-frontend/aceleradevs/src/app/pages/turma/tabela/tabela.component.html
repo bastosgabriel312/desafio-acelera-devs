@@ -1,7 +1,7 @@
 <div class="alert alert-danger" role="alert" *ngIf="dataSource==undefined && message?.status==0">
   Consulta indisponível, tente novamente mais tarde.
 </div>
-<!-- <form-modal (callParent)="onCallParent()"></form-modal> -->
+<form-modal (callParent)="onCallParent()"></form-modal>
 <div class="container justify-content-between">
 <table mat-table [dataSource]="dataSource" class="mat-elevation" *ngIf="!(dataSource==undefined)">
 

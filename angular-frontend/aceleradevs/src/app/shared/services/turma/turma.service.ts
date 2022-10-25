@@ -24,6 +24,13 @@ export class TurmaService {
     return this.httpClient.get<DetalheTurma>(`${this.API}/turma/${id}`);
   }
 
+  createTurma(curso: any): Observable<Turma> {
+    return this.httpClient.post<any>(
+      `${this.API}/turma`,
+      curso
+    );
+  }
+
   updateTurma(id:number,turma: any): Observable<DetalheTurma> {
     return this.httpClient.put<DetalheTurma>(
       `${this.API}/turma/${id}`,

@@ -14,6 +14,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { TurmaDetalhesComponent } from './turma-detalhes/turma-detalhes.component';
+import { FormModalComponent } from './form-modal/form-modal.component';
 
 @NgModule({
   imports: [
@@ -34,13 +35,13 @@ import { TurmaDetalhesComponent } from './turma-detalhes/turma-detalhes.componen
     TabelaComponent,
     TurmaComponent,
     TurmaDetalhesComponent,
-    // FormModalComponent
+    FormModalComponent
   ],
   exports:[
     TabelaComponent,
     TurmaComponent,
     TurmaDetalhesComponent,
-    // FormModalComponent
+    FormModalComponent
     ]
 })
 export class TurmaModule { }

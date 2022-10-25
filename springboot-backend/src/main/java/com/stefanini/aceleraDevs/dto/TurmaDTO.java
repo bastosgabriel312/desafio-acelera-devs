@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import com.stefanini.aceleraDevs.model.Turma;
 
 public class TurmaDTO {
-	@NotNull
 	private Long id;
 	@NotNull
 	private String nome;
