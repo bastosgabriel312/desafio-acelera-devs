@@ -71,7 +71,7 @@
           <div class="form-group col-md-6">  
             <mat-form-field appearance="fill">
               <mat-label>Curso</mat-label>
-              <mat-select formControlName="curso" >
+              <mat-select formControlName="curso" (ngModelChange)="getTurmasComDisciplinasInCurso($event)" >
                 <mat-option *ngFor="let cursoOption of cursos" [value]="cursoOption.id">{{cursoOption.name}}</mat-option>
               </mat-select>
               <mat-hint align="end">Selecione um curso.</mat-hint>

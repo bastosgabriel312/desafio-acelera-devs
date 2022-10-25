@@ -42,6 +42,7 @@ export class AlunoDetalhesComponent implements OnInit {
     this.alunosService.getAlunoById(Number(id)).subscribe(
       (aluno) => {
         this.aluno = aluno;
+        console.log(this.aluno)
         this.message ={'status':200};
         this.editarForm.setValue({
           nome: aluno.nome,
@@ -76,6 +77,23 @@ export class AlunoDetalhesComponent implements OnInit {
         this.message = error;
       });
     }
+
+  getTurmasComDisciplinasInCurso(idCurso:number): void {
+    this.alunosService.getTurmasComDisciplinasInCurso(idCurso).subscribe(
+      (turmas) => {
+        this.turmas = turmas;
+        this.editarForm.controls.turma.setErrors(null);
+      },
+      (error: Error)=>{
+        this.message = error;
+        this.turmas = [];
+        this.editarForm.controls.turma.setErrors(Validators.required);
+        this.alertService.showAlert("Não há turma disponível que condiz com curso escolhido, por favor verifique as disciplinas das turmas.",AlertTypes.INFO)
+
+      }
+    )
+
+  }
   
   getCursos(): void {
     this.cursoService.getCursos().subscribe(
@@ -84,11 +102,13 @@ export class AlunoDetalhesComponent implements OnInit {
       },
       (error: Error) => {
         this.message = error;
+        
       });
     }
   
   habilitarForm(){
     this.editarForm.enable();
+    console.log(this.turmas)
   }
   patternNome = "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$";
   patternCpf = "^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$";

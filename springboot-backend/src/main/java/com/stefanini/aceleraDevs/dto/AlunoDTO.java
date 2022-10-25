@@ -104,8 +104,6 @@ public class AlunoDTO {
         this.email = email;
     }
 
-    
-
     public String getTelefone() {
         return telefone;
     }
@@ -193,5 +191,4 @@ public class AlunoDTO {
         return alunos.stream().map(AlunoDTO::new).collect(Collectors.toList());
     }
 
-    
 }

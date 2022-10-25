@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Aluno, Alunos } from '../../model/Aluno';
+import { Turmas } from '../../model/Turma';
 
 
 @Injectable({
@@ -62,5 +63,10 @@ export class AlunoService {
   deleteAluno(idAluno: number): any {
     return this.httpClient
       .delete<Aluno>(`${this.API}/aluno/${idAluno}`);
+  }
+
+  getTurmasComDisciplinasInCurso(idCurso:number): Observable<Turmas> {
+    return this.httpClient
+    .get<Turmas>(`${this.API}/aluno/turmas/${idCurso}`);
   }
 }

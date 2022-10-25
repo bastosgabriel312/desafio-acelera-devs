@@ -31,7 +31,6 @@ export class FormModalComponent implements OnInit {
 
   ngOnInit() {
     this.getCursos();
-    this.getTurmas();
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class:'modal-xl'});
@@ -44,6 +43,23 @@ export class FormModalComponent implements OnInit {
     (error: Error) => {
       this.message = error;
     });
+  }
+
+  getTurmasComDisciplinasInCurso(idCurso:number): void {
+    this.alunoService.getTurmasComDisciplinasInCurso(idCurso).subscribe(
+      (turmas) => {
+        this.turmas = turmas;
+        this.form.controls.turma.setErrors(null);
+      },
+      (error: Error)=>{
+        this.message = error;
+        this.turmas = [];
+        this.form.controls.turma.setErrors(Validators.required);
+        this.alertService.showAlert("Não há turma disponível que condiz com curso escolhido, por favor verifique as disciplinas das turmas.",AlertTypes.INFO)
+
+      }
+    )
+
   }
 
   getCursos(): void {

@@ -21,12 +21,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.stefanini.aceleraDevs.controller.form.AlunoForm;
 import com.stefanini.aceleraDevs.dto.AlunoDTO;
+import com.stefanini.aceleraDevs.dto.TurmaDTO;
 import com.stefanini.aceleraDevs.exception.AlunoNotFoundException;
 import com.stefanini.aceleraDevs.exception.CursoNotFoundException;
 import com.stefanini.aceleraDevs.exception.DisciplinaNotFoundException;
 import com.stefanini.aceleraDevs.exception.TurmaNotFoundException;
 import com.stefanini.aceleraDevs.mapper.AlunoDTOService;
 import com.stefanini.aceleraDevs.model.Aluno;
+import com.stefanini.aceleraDevs.model.Curso;
+import com.stefanini.aceleraDevs.model.Turma;
 import com.stefanini.aceleraDevs.service.AlunoService;
 import com.stefanini.aceleraDevs.service.CursoService;
 import com.stefanini.aceleraDevs.service.TurmaService;
@@ -71,7 +74,7 @@ public class AlunoController {
             URI uri = uriBuilder.path("/aluno/{id}").buildAndExpand(alunoSaved.getId()).toUri();
             return ResponseEntity.created(uri).body(new AlunoDTO(alunoSaved));
         } catch (ConstraintViolationException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dados pessoais inválidos");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Número do registro de contribuinte individual brasileiro (CPF) inválido");
         } 
     }
 
@@ -109,6 +112,17 @@ public class AlunoController {
             return ResponseEntity.ok().build();
         } catch (AlunoNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+    
+    @GetMapping("/turmas/{idCurso}")
+    public ResponseEntity<?> getTurmasComDisciplinasInCurso(@PathVariable Long idCurso){
+        try {
+            Curso curso = cursoService.findById(idCurso);
+            List<Turma> turmas = alunoService.listaDisciplinasInCurso(curso);
+            return ResponseEntity.ok(TurmaDTO.converter(turmas));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

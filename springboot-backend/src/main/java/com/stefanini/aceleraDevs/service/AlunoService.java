@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.stefanini.aceleraDevs.exception.AlunoNotFoundException;
 import com.stefanini.aceleraDevs.model.Aluno;
+import com.stefanini.aceleraDevs.model.Curso;
+import com.stefanini.aceleraDevs.model.Turma;
 import com.stefanini.aceleraDevs.repository.AlunoRepository;
 
 @Service
@@ -15,10 +17,12 @@ public class AlunoService {
 
     private final AlunoRepository alunoRepository;
     private final DisciplinaService disciplinaService;
+    private final TurmaService turmaService;
 
-    public AlunoService(AlunoRepository alunoRepository, DisciplinaService disciplinaService) {
+    public AlunoService(AlunoRepository alunoRepository, DisciplinaService disciplinaService, TurmaService turmaService) {
         this.alunoRepository = alunoRepository;
         this.disciplinaService = disciplinaService;
+        this.turmaService = turmaService;
     }
 
     public List<Aluno> findAllAlunos() {
@@ -36,13 +40,24 @@ public class AlunoService {
     // Verifica se as disciplinas condizem com o curso que o aluno está matriculado.
     public boolean disciplinasInCurso(Aluno aluno) {
         if (!(aluno == null)) {
-            List<Long> disciplinasCurso = disciplinaService.findAllByCurso(aluno.getCurso()).stream().map(d->d.getId()).collect(Collectors.toList());
-            List<Long> disciplinasTurma = disciplinaService.findAllByTurma(aluno.getTurma()).stream().map(d->d.getId()).collect(Collectors.toList());
-            return disciplinasCurso.containsAll(disciplinasTurma);
+            return this.disciplinasTurmaInCurso(aluno.getTurma(),aluno.getCurso());
         }
         return false;
     }
+    
+    public boolean disciplinasTurmaInCurso(Turma turma, Curso curso) {
+        List<Long> disciplinasCurso = disciplinaService.findAllByCurso(curso).stream().map(d->d.getId()).collect(Collectors.toList());
+        List<Long> disciplinasTurma = disciplinaService.findAllByTurma(turma).stream().map(d->d.getId()).collect(Collectors.toList());
+        return disciplinasCurso.containsAll(disciplinasTurma);
+    }
 
+    // Retorna lista de turmas se as disciplinas condizem com o curso que o aluno está matriculado.
+    public List<Turma> listaDisciplinasInCurso(Curso curso) {
+        List<Turma> turmas = turmaService.findAllTurmas();
+        List<Turma> turmasAdequadas = turmas.stream()
+                .map(t->this.disciplinasTurmaInCurso(t,curso)? t:null).collect(Collectors.toList());
+        return turmasAdequadas;
+    }
 
     public void deleteById(Long id) throws AlunoNotFoundException {
         Aluno aluno = findById(id);
