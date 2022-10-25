@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light ">
-  <a class="navbar-brand" href="#">
-    Acelera
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 mb-5 bg-white rounded">
+  <a class="navbar-brand icon-nav" href="/">
+    Universidade
   </a>
 
   <button class="navbar-toggler" type="button"
@@ -12,7 +12,8 @@
        [ngClass]="{ 'show': navbarOpen }">
     <ul class="navbar-nav mr-auto  w-100 justify-content-end">
       <li class="nav-item" *ngFor="let opcao of optionsMenu">
-        <a class="nav-link" href="{{opcao.router}}">{{opcao.nome}}</a>
+          
+        <a class="nav-link" [routerLink]="opcao.router" routerLinkActive="active"><mat-icon fontIcon="{{opcao.type}}"></mat-icon> {{opcao.nome}}</a>
       </li>
     </ul>
   </div>

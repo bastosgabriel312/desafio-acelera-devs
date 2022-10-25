@@ -17,6 +17,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { DisciplinaModule } from './pages/disciplina/disciplina.module';
 import { TurmaModule } from './pages/turma/turma.module';
 import { CursoModule } from './pages/curso/Curso.module';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { CursoModule } from './pages/curso/Curso.module';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatIconModule
   ],
 
   bootstrap: [AppComponent],

@@ -12,22 +12,22 @@ export class NavbarComponent implements OnInit {
   optionsMenu: Menus = [
     {
       nome:'Aluno',
-      type:'',
+      type:'person',
       router:'/aluno'
       },
     {
       nome:'Turma',
-      type:'',
+      type:'people',
       router:'/turma'
       },
     {
       nome:'Curso',
-      type:'',
+      type:'school',
       router:'/curso'
     },
     {
       nome:'Disciplina',
-      type:'',
+      type:'class',
       router:'/disciplina'
     }
   ];

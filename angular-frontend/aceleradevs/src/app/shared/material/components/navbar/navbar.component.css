@@ -1,0 +1,22 @@
+ul.a {
+    font-family: 'Cairo', sans-serif !important;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #7b83eb !important;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #41477cec !important;
+}
+
+
+.navbar-light .navbar-nav .active {
+    color: #41477c !important;
+}
+
+.navbar-light .navbar-brand{
+    color: #41477c !important;
+}
+
+.navbar-light .navbar-brand:hover {
+    color: #7b83eb !important;
+}

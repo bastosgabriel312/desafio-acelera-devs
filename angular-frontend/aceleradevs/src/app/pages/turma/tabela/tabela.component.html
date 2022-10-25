@@ -2,7 +2,8 @@
   Consulta indisponível, tente novamente mais tarde.
 </div>
 <form-modal (callParent)="onCallParent()"></form-modal>
-<div class="container justify-content-between">
+
+<section class="shadow mt-2 p-3 mb-5 bg-white rounded">
 <table mat-table [dataSource]="dataSource" class="mat-elevation" *ngIf="!(dataSource==undefined)">
 
   <!-- Nome Column -->
@@ -20,4 +21,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-</div>
+</section>

@@ -7,6 +7,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import {MatIconModule} from '@angular/material/icon';
 
 const MODULES = [
   TooltipModule,
@@ -14,7 +15,8 @@ const MODULES = [
   CarouselModule,
   BsDropdownModule,
   CollapseModule,
-  AccordionModule
+  AccordionModule,
+  MatIconModule
 ];
 
 @NgModule({

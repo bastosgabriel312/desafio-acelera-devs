@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f2f4f7 !important}
 
 .cdk-global-overlay-wrapper, .cdk-overlay-container {
     z-index: 10000 !important;
@@ -9,3 +9,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-form-field{
         width: 100%;
     }
+.btn-info{
+    background-color: #7b83eb!important;
+    border-color: #7b83eb!important;
+}
+
+.btn-info:hover{
+    background-color: #41477c!important;
+    border-color: #41477c!important;
+}
+
+.container.border.p-5 {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px !important;
+    border: none !important;
+    background-color:white;
+}
