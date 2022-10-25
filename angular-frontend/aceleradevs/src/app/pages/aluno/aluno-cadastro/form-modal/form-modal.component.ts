@@ -1,16 +1,12 @@
 import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Aluno } from 'src/app/shared/model/Aluno';
 import { Cursos } from 'src/app/shared/model/Curso';
 import { Turmas } from 'src/app/shared/model/Turma';
 import { AlertService, AlertTypes } from 'src/app/shared/services/alert/alert.service';
 import { AlunoService } from 'src/app/shared/services/aluno/aluno.service';
 import { CursoService } from 'src/app/shared/services/curso/curso.service';
 import { TurmaService } from 'src/app/shared/services/turma/turma.service';
-import { TabelaComponent } from '../../tabela/tabela.component';
-
 
 @Component({
   selector: 'form-modal',

@@ -1,6 +1,4 @@
-import {Component, TemplateRef} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import {Component} from '@angular/core';
 import { CursoService } from 'src/app/shared/services/curso/curso.service';
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Cursos } from 'src/app/shared/model/Curso';
 
 import { CursoService } from 'src/app/shared/services/curso/curso.service';

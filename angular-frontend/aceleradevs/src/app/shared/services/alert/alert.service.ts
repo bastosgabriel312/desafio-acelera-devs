@@ -1,5 +1,4 @@
-import { Component, Injectable, } from '@angular/core';
-import { ControlContainer, FormGroup } from '@angular/forms';
+import { Injectable, } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertsComponent } from '../../components/alerts/alerts.component';
 

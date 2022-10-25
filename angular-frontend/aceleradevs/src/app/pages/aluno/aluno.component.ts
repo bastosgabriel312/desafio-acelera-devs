@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Alunos } from 'src/app/shared/model/Aluno';
 import { AlunoService } from 'src/app/shared/services/aluno/aluno.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-aluno',

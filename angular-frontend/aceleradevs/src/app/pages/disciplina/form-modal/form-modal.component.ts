@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Cursos } from 'src/app/shared/model/Curso';
 import { Turmas } from 'src/app/shared/model/Turma';
@@ -8,7 +7,6 @@ import { AlertService, AlertTypes } from 'src/app/shared/services/alert/alert.se
 import { CursoService } from 'src/app/shared/services/curso/curso.service';
 import { DisciplinaService } from 'src/app/shared/services/disciplina/disciplina.service';
 import { TurmaService } from 'src/app/shared/services/turma/turma.service';
-import { TabelaComponent } from '../tabela/tabela.component';
 
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Menu, Menus } from 'src/app/shared/model/Menu';
+import { Menus } from 'src/app/shared/model/Menu';
 
 @Component({
   selector: 'app-navbar',

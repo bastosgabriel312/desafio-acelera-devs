@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CursoService } from 'src/app/shared/services/curso/curso.service';
 import { TurmaService } from 'src/app/shared/services/turma/turma.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Turmas } from 'src/app/shared/model/Turma';
 import { Cursos } from 'src/app/shared/model/Curso';

@@ -60,9 +60,6 @@ export class TurmaDetalhesComponent implements OnInit {
 
   onSubmit(): void {
     if(this.editarForm.valid){
-      console.log(this.editarForm.value)
-      if(this.editarForm.valid){
-          console.log(this.editarForm.value);
           this.turmaService.updateTurma(this.turma.id,this.turmaService.convertFormToTurma(this.editarForm.value)).subscribe(
             (turma) =>{
               this.alertService.showAlert("Turma salva com sucesso",
@@ -75,7 +72,6 @@ export class TurmaDetalhesComponent implements OnInit {
               this.alertService.showAlert(this.message.error,
                 AlertTypes.DANGER);
             });
-         }
      }
    }
  

@@ -1,8 +1,5 @@
-import {Component, TemplateRef} from '@angular/core';
-import { Aluno,Alunos } from 'src/app/shared/model/Aluno';
+import {Component} from '@angular/core';
 import { AlunoService } from 'src/app/shared/services/aluno/aluno.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 
 @Component({

@@ -65,7 +65,6 @@ export class CursoDetalhesComponent implements OnInit {
   onSubmit(): void {
     if(this.editarForm.valid){
       console.log(this.editarForm.value)
-      if(this.editarForm.valid){
         this.editarForm.enable();
         this.cursoService.updateCurso(this.curso.id,this.cursoService.convertFormToCurso(this.editarForm.value)).subscribe(
            (curso) =>{
@@ -80,8 +79,7 @@ export class CursoDetalhesComponent implements OnInit {
              this.cursoService.convertFormToCurso(this.editarForm.value)
              this.alertService.showAlert(this.message.error,
                AlertTypes.DANGER);
-           });
-         }
+           });  
      }
    }
  
