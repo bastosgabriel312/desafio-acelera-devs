@@ -18,6 +18,7 @@ import { DisciplinaModule } from './pages/disciplina/disciplina.module';
 import { TurmaModule } from './pages/turma/turma.module';
 import { CursoModule } from './pages/curso/Curso.module';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    NgxMaskModule.forRoot()
   ],
 
   bootstrap: [AppComponent],

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Data;
@@ -37,7 +39,7 @@ public class DadosPessoais {
 	@Column(nullable = false)
 	private String rg;
 
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval = true)
 	private Endereco endereco;
 
 	public DadosPessoais() {

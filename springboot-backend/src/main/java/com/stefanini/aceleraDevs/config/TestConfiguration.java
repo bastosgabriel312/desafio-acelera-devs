@@ -33,6 +33,7 @@ public class TestConfiguration {
                                         EnderecoRepository enderecoRepository) {
         return args -> {
             Turma turma = new Turma();
+            turma.setNome("MD1A");
             turmaRepository.save(turma);
             
             Curso curso = new Curso(null, "medicina",
@@ -40,11 +41,11 @@ public class TestConfiguration {
                     370,null);
             cursoRepository.save(curso);
             DadosPessoais dadosPessoais = new DadosPessoais(null,
-                    "156-456-41",
+                    "98603077096",
                     "joao@gmail.com",
                     "11997777777",
                     "385208510",
-                    new Endereco(null,"Rua blablabla","10","Mauá","São Paulo","09450000")
+                    new Endereco(null,"Rua Santos","10","Mauá","São Paulo","09450000")
                     );
             Aluno joao = new Aluno(null,
                     "Joao",

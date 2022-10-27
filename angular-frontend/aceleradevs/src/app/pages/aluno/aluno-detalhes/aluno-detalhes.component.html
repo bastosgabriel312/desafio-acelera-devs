@@ -36,14 +36,14 @@
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>CPF</mat-label>
-          <input matInput formControlName="cpf" maxlength="254" required />
+          <input matInput formControlName="cpf" maxlength="254" mask="000.000.000-00" required />
           <mat-error *ngIf="editarForm.get('cpf')?.hasError">Insira um CPF válido</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>RG</mat-label>
-          <input matInput formControlName="rg" maxlength="254" required />
+          <input matInput formControlName="rg" maxlength="254" mask="00.000.000-9"  required />
           <mat-error *ngIf="editarForm.get('rg')?.hasError">Insira um RG válido</mat-error>
         </mat-form-field>
       </div>
@@ -51,8 +51,7 @@
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>Telefone</mat-label>
-          <input matInput formControlName="telefone" maxlength="254" required />
-          <mat-hint align="end">Exemplo: 11 998765432 ou 11 87654321</mat-hint>
+          <input matInput formControlName="telefone" maxlength="254" mask="(00) 0000-00000 ||(00) 0000-0000" required />
           <mat-error *ngIf="editarForm.get('telefone')?.hasError">Insira um telefone válido</mat-error>
         </mat-form-field>
       </div>
@@ -108,7 +107,7 @@
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>CEP</mat-label>
-          <input matInput formControlName="cep" maxlength="254" required />
+          <input matInput formControlName="cep" maxlength="254" mask="00000-000" required />
           <mat-error *ngIf="editarForm.get('cep')?.hasError">Insira um cep válido</mat-error>
         </mat-form-field>
       </div>

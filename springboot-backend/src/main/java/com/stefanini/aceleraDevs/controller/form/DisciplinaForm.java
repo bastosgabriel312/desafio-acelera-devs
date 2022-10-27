@@ -88,16 +88,20 @@ public class DisciplinaForm {
 			TurmaService turmaService)
 			throws DisciplinaNotFoundException, CursoNotFoundException, TurmaNotFoundException {
 		Disciplina disciplina = disciplinaService.findById(id);
-		Curso curso = cursoService.findById(this.curso);
+		Curso cursoAntigo = disciplina.getCurso();
+		Curso cursoAtual = cursoService.findById(this.curso);
 		Turma turma = turmaService.findById(this.turma);
 		disciplina.setCodigo(this.codigo);
 		disciplina.setConteudoProgramatico(this.conteudoProgramatico);
-		disciplina.setCurso(curso);
+		disciplina.setCurso(cursoAtual);
 		disciplina.setTurma(turma);
 		disciplina.setTotalHoras(this.totalHoras);
 		disciplina.setNome(this.getNome());
 		disciplina.setNumeroCreditos(this.numeroCreditos);
 		disciplinaService.save(disciplina);
+		// Atualiza as horas do curso antigo, caso a disciplina seja alterada de curso		
+		Integer totalHorasCurso = disciplinaService.somaTotalHorasByCurso(cursoAntigo);
+        cursoService.updateTotalHoras(totalHorasCurso, cursoAntigo);
 		return disciplina;
 	}
 

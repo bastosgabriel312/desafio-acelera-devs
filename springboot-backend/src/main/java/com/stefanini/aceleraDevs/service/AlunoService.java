@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.stefanini.aceleraDevs.exception.AlunoNotFoundException;
+import com.stefanini.aceleraDevs.exception.DadosPessoaisNotFoundException;
 import com.stefanini.aceleraDevs.model.Aluno;
 import com.stefanini.aceleraDevs.model.Curso;
 import com.stefanini.aceleraDevs.model.Turma;
@@ -18,11 +19,13 @@ public class AlunoService {
     private final AlunoRepository alunoRepository;
     private final DisciplinaService disciplinaService;
     private final TurmaService turmaService;
+    private final DadosPessoaisService dadosPessoaisService;
 
-    public AlunoService(AlunoRepository alunoRepository, DisciplinaService disciplinaService, TurmaService turmaService) {
+    public AlunoService(AlunoRepository alunoRepository, DisciplinaService disciplinaService, TurmaService turmaService, DadosPessoaisService dadosPessoaisService) {
         this.alunoRepository = alunoRepository;
         this.disciplinaService = disciplinaService;
         this.turmaService = turmaService;
+        this.dadosPessoaisService = dadosPessoaisService;
     }
 
     public List<Aluno> findAllAlunos() {
@@ -59,9 +62,9 @@ public class AlunoService {
         return turmasAdequadas;
     }
 
-    public void deleteById(Long id) throws AlunoNotFoundException {
+    public void deleteById(Long id) throws AlunoNotFoundException, DadosPessoaisNotFoundException {
         Aluno aluno = findById(id);
         alunoRepository.delete(aluno);
-
+        dadosPessoaisService.deleteById(aluno.getDadosPessoais().getId());
     }
 }

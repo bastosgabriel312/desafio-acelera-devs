@@ -108,7 +108,6 @@ public class AlunoController {
         try {
             Aluno aluno = alunoService.findById(id);
             alunoService.deleteById(aluno.getId());
-            ;
             return ResponseEntity.ok().build();
         } catch (AlunoNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
