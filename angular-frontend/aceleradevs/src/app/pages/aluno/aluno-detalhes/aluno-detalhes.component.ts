@@ -9,6 +9,8 @@ import { Validators } from '@angular/forms';
 import { Turmas } from 'src/app/shared/model/Turma';
 import { Cursos } from 'src/app/shared/model/Curso';
 import { AlertService, AlertTypes } from 'src/app/shared/services/alert/alert.service';
+import { ConsultaCepService } from 'src/app/shared/services/cep/consultaCep.service';
+import { EnderecoCepApi } from 'src/app/shared/model/EnderecoCepApi';
 
 @Component({
   selector: 'app-aluno-detalhes',
@@ -20,6 +22,7 @@ export class AlunoDetalhesComponent implements OnInit {
   message: any;
   turmas?:Turmas;
   cursos?:Cursos;
+  endereco!: EnderecoCepApi;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +31,8 @@ export class AlunoDetalhesComponent implements OnInit {
     private turmaService: TurmaService,
     private cursoService: CursoService,
     private formBuilder: FormBuilder,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private consultaCEP: ConsultaCepService,
   ) {}
 
   ngOnInit() {
@@ -110,28 +114,6 @@ export class AlunoDetalhesComponent implements OnInit {
     this.editarForm.enable();
     console.log(this.turmas)
   }
-  patternNome = "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$";
-  patternCpf = "^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$";
-  patternRg = "^[0-9]{2,3}\\.?[0-9]{2,3}\\.?[0-9]{3}\\-?[A-Za-z0-9]{1}$";
-  patternTelefone = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$";
-  patternCep= "^([\\d]{2})\\.?([\\d]{3})\\-?([\\d]{3})";
-
-
-  editarForm = this.formBuilder.group({
-    nome: ['', [Validators.pattern(this.patternNome)]],
-    matricula: ['', [Validators.required]],
-    email: ['', [Validators.email]],
-    cpf: ['', [Validators.pattern(this.patternCpf)]],
-    rg: ['', [Validators.pattern(this.patternRg)]],
-    telefone: ['', [Validators.pattern(this.patternTelefone)]],
-    rua: ['', [Validators.required]],
-    numero:['', [Validators.required]],
-    estado: ['', [Validators.required]],
-    cidade: ['', [Validators.required]],
-    cep: ['', [Validators.pattern(this.patternCep)]],
-    turma: ['', [Validators.required]],
-    curso: ['', [Validators.required]],
-  });
 
   onSubmit(): void {
    if(this.editarForm.valid){
@@ -165,5 +147,39 @@ export class AlunoDetalhesComponent implements OnInit {
         });
       }
     }
+
+    getEndereco(): void {
+      const cep = this.editarForm.get('cep')?.value;
+      this.consultaCEP.enderecoPorCep(cep).subscribe((endereco) => {
+        this.endereco = endereco;
+        this.editarForm.controls.rua.setValue(endereco.logradouro == undefined?'':endereco.logradouro + ", " + endereco.bairro);
+        this.editarForm.controls.cidade.setValue(endereco.localidade);
+        this.editarForm.controls.estado.setValue(endereco.uf);
+
+      });
+    } 
+
+    // FORMS
+    patternNome = "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$";
+    patternCpf = "^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$";
+    patternRg = "^[0-9]{2,3}\\.?[0-9]{2,3}\\.?[0-9]{3}\\-?[A-Za-z0-9]{1}$";
+    patternTelefone = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$";
+    patternCep= "^([\\d]{2})\\.?([\\d]{3})\\-?([\\d]{3})";
   
+  
+    editarForm = this.formBuilder.group({
+      nome: ['', [Validators.pattern(this.patternNome)]],
+      matricula: ['', [Validators.required]],
+      email: ['', [Validators.email]],
+      cpf: ['', [Validators.pattern(this.patternCpf)]],
+      rg: ['', [Validators.pattern(this.patternRg)]],
+      telefone: ['', [Validators.pattern(this.patternTelefone)]],
+      rua: ['', [Validators.required]],
+      numero:['', [Validators.required]],
+      estado: ['', [Validators.required]],
+      cidade: ['', [Validators.required]],
+      cep: ['', [Validators.pattern(this.patternCep)]],
+      turma: ['', [Validators.required]],
+      curso: ['', [Validators.required]],
+    });
 }

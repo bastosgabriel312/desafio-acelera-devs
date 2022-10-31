@@ -3,6 +3,10 @@ import { NgxBootstrapModule } from './material/ngx-bootstrap/ngx-bootstrap.modul
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AlertsComponent } from './components/alerts/alerts.component';
+
+
+
+
 const COMPONENTS = [AlertsComponent];
 const MODULES = [NgxBootstrapModule, RouterModule];
 

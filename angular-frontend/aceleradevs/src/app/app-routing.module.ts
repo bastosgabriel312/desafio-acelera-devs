@@ -6,10 +6,14 @@ import { CursoDetalhesComponent } from './pages/curso/curso-detalhes/curso-detal
 import { CursoComponent } from './pages/curso/Curso.component';
 import { DisciplinaDetalhesComponent } from './pages/disciplina/disciplina-detalhes/disciplina-detalhes.component';
 import { DisciplinaComponent } from './pages/disciplina/disciplina.component';
+import { HomeComponent } from './pages/home/home.component';
 import { TurmaDetalhesComponent } from './pages/turma/turma-detalhes/turma-detalhes.component';
 import { TurmaComponent } from './pages/turma/turma.component';
 
 const routes: Routes = [
+  {
+    path: '', component: HomeComponent
+  },
   {
     path: 'aluno', component: AlunoComponent
   },

@@ -2,9 +2,11 @@ import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/c
 import { FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Cursos } from 'src/app/shared/model/Curso';
+import { EnderecoCepApi } from 'src/app/shared/model/EnderecoCepApi';
 import { Turmas } from 'src/app/shared/model/Turma';
 import { AlertService, AlertTypes } from 'src/app/shared/services/alert/alert.service';
 import { AlunoService } from 'src/app/shared/services/aluno/aluno.service';
+import { ConsultaCepService } from 'src/app/shared/services/cep/consultaCep.service';
 import { CursoService } from 'src/app/shared/services/curso/curso.service';
 import { TurmaService } from 'src/app/shared/services/turma/turma.service';
 
@@ -18,6 +20,7 @@ export class FormModalComponent implements OnInit {
   turmas?:Turmas;
   cursos?:Cursos;
   message: any;
+  endereco!: EnderecoCepApi;
   @Output() callParent = new EventEmitter<any>();
 
 
@@ -27,23 +30,28 @@ export class FormModalComponent implements OnInit {
     private turmaService: TurmaService,
     private cursoService: CursoService,
     private formBuilder: FormBuilder,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private consultaCEP: ConsultaCepService,) { }
 
   ngOnInit() {
     this.getCursos();
   }
+
+
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class:'modal-xl'});
- }
- getTurmas(): void {
-  this.turmaService.getTurmas().subscribe(
-    (turmas) =>{
-      this.turmas = turmas;
-    },
-    (error: Error) => {
-      this.message = error;
-    });
   }
+
+  // REQUISIÇÕES
+  getTurmas(): void {
+    this.turmaService.getTurmas().subscribe(
+      (turmas) =>{
+        this.turmas = turmas;
+      },
+      (error: Error) => {
+        this.message = error;
+      });
+    }
 
   getTurmasComDisciplinasInCurso(idCurso:number): void {
     this.alunoService.getTurmasComDisciplinasInCurso(idCurso).subscribe(
@@ -92,8 +100,19 @@ export class FormModalComponent implements OnInit {
         });
       }
     }
-      
 
+    getEndereco(): void {
+      const cep = this.form.get('cep')?.value;
+      this.consultaCEP.enderecoPorCep(cep).subscribe((endereco) => {
+        this.endereco = endereco;
+        this.form.controls.rua.setValue(endereco.logradouro == undefined?'':endereco.logradouro + ", " + endereco.bairro);
+        this.form.controls.cidade.setValue(endereco.localidade);
+        this.form.controls.estado.setValue(endereco.uf);
+
+      });
+    } 
+      
+  // FORMS
   patternNome = "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$";
   patternCpf = "^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$";
   patternRg = "^[0-9]{2,3}\\.?[0-9]{2,3}\\.?[0-9]{3}\\-?[A-Za-z0-9]{1}$";
@@ -102,19 +121,19 @@ export class FormModalComponent implements OnInit {
 
 
   form = this.formBuilder.group({
-  nome: ['', [Validators.pattern(this.patternNome)]],
-  matricula: ['', [Validators.required]],
-  email: ['', [Validators.email]],
-  cpf: ['', [Validators.pattern(this.patternCpf)]],
-  rg: ['', [Validators.pattern(this.patternRg)]],
-  telefone: ['', [Validators.pattern(this.patternTelefone)]],
-  rua: ['', [Validators.required]],
-  numero:['', [Validators.required]],
-  estado: ['', [Validators.required]],
-  cidade: ['', [Validators.required]],
-  cep: ['', [Validators.pattern(this.patternCep)]],
-  turma: ['', [Validators.required]],
-  curso: ['', [Validators.required]],
-});
+            nome: ['', [Validators.pattern(this.patternNome)]],
+            matricula: ['', [Validators.required]],
+            email: ['', [Validators.email]],
+            cpf: ['', [Validators.pattern(this.patternCpf)]],
+            rg: ['', [Validators.pattern(this.patternRg)]],
+            telefone: ['', [Validators.pattern(this.patternTelefone)]],
+            rua: ['', [Validators.required]],
+            numero:['', [Validators.required]],
+            estado: ['', [Validators.required]],
+            cidade: ['', [Validators.required]],
+            cep: ['', [Validators.pattern(this.patternCep)]],
+            turma: ['', [Validators.required]],
+            curso: ['', [Validators.required]],
+        });
 
 }

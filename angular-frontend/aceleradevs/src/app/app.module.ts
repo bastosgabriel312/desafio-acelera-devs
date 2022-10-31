@@ -15,10 +15,13 @@ import { AlunoModule } from './pages/aluno/aluno.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DisciplinaModule } from './pages/disciplina/disciplina.module';
+import { HomeModule } from './pages/home/home.module';
 import { TurmaModule } from './pages/turma/turma.module';
 import { CursoModule } from './pages/curso/Curso.module';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { MatIconModule } from '@angular/material/icon';
+import { NgxMaskModule } from 'ngx-mask';
+import { CommonModule } from '@angular/common';
+
 
 
 @NgModule({
@@ -30,9 +33,10 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     DisciplinaModule,
     TurmaModule,
     CursoModule,
+    HomeModule,
     HttpClientModule,
     ModalModule.forRoot(),
-
+    CommonModule,
     TooltipModule,
     CollapseModule,
     BrowserAnimationsModule,
@@ -40,7 +44,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     MatPaginatorModule,
     MatSortModule,
     MatIconModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
 
   bootstrap: [AppComponent],

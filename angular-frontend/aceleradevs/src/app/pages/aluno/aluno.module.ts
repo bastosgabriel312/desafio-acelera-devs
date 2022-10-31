@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormModalComponent } from './aluno-cadastro/form-modal/form-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     RouterModule,
     MatInputModule,
     ModalModule,
-    NgxMaskModule.forChild()
+    NgxMaskModule.forChild(),
+    MatIconModule
   ],
   declarations: [
     AlunoComponent,

@@ -107,7 +107,10 @@
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>CEP</mat-label>
-          <input matInput formControlName="cep" maxlength="254" mask="00000-000" required />
+          <input matInput formControlName="cep" maxlength="254" mask="00000-000"   required />
+          <a *ngIf="editarForm.get('cep')?.valid" matSuffix mat-icon-button aria-label="Search" (click)="getEndereco()">
+            <mat-icon>search</mat-icon>
+          </a>
           <mat-error *ngIf="editarForm.get('cep')?.hasError">Insira um cep válido</mat-error>
         </mat-form-field>
       </div>
