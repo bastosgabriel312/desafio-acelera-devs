@@ -93,6 +93,16 @@
         </div>
         <div class="form-group col-md-2">
           <mat-form-field appearance="fill">
+            <mat-label>CEP</mat-label>
+            <input matInput formControlName="cep" mask="00000-000" required />
+            <a *ngIf="form.get('cep')?.valid" matSuffix mat-icon-button aria-label="Search" (click)="getEndereco()">
+              <mat-icon>search</mat-icon>
+            </a>
+            <mat-error *ngIf="form.get('cep')?.hasError">Insira um cep válido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-3">
+          <mat-form-field appearance="fill">
             <mat-label>Logradouro</mat-label>
             <input matInput formControlName="rua" required />
             <mat-error *ngIf="form.get('rua')?.hasError">Insira um endereço válido</mat-error>
@@ -100,7 +110,7 @@
         </div>
         <div class="form-group col-md-1">
           <mat-form-field appearance="fill">
-            <mat-label>Numero</mat-label>
+            <mat-label>Nº</mat-label>
             <input matInput formControlName="numero" required />
             <mat-error *ngIf="form.get('numero')?.hasError">Insira um número válido</mat-error>
           </mat-form-field>
@@ -113,16 +123,7 @@
             <mat-error *ngIf="form.get('cidade')?.hasError">Insira uma cidade válida</mat-error>
           </mat-form-field>
         </div>
-        <div class="form-group col-md-3">
-          <mat-form-field appearance="fill">
-            <mat-label>CEP</mat-label>
-            <input matInput formControlName="cep" mask="00000-000" required />
-            <a *ngIf="form.get('cep')?.valid" matSuffix mat-icon-button aria-label="Search" (click)="getEndereco()">
-              <mat-icon>search</mat-icon>
-            </a>
-            <mat-error *ngIf="form.get('cep')?.hasError">Insira um cep válido</mat-error>
-          </mat-form-field>
-        </div>
+        
         <div class="form-group col-md-3">
           <mat-form-field appearance="fill">
             <mat-label>Estado</mat-label>
