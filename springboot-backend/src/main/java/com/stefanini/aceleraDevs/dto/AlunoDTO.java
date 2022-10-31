@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.stefanini.aceleraDevs.mapper.AlunoDTOService;
 import com.stefanini.aceleraDevs.model.Aluno;
 import com.stefanini.aceleraDevs.model.Curso;
 import com.stefanini.aceleraDevs.model.Endereco;
@@ -143,10 +144,11 @@ public class AlunoDTO {
         this.endereco = endereco;
     }
 
-    public static boolean regexValid(Pattern pattern, String texto) {
-        Matcher matcher = pattern.matcher(texto);
+    public static boolean regexValid(String pattern, String texto) {
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(texto);
 
-        if (matcher.find()) {
+        if (m.find()) {
             return true;
         }
         return false;
@@ -154,27 +156,24 @@ public class AlunoDTO {
     }
 
     public static boolean isValidCep(String cep) {
-        String regexString = "^([\\d]{2})\\.?([\\d]{3})\\-?([\\d]{3})";
-        Pattern pattern = Pattern.compile(regexString);
-        if (!regexValid(pattern, cep) || cep.length() > 9) {
+        String patternCep = "^([\\d]{2})\\.?([\\d]{3})\\-?([\\d]{3})";
+        if (!regexValid(patternCep, cep) || cep.length() > 9) {
             return false;
         }
         return true;
     }
 
     public static boolean isValidTelefone(String telefone) {
-        String regexString = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$";
-        Pattern pattern = Pattern.compile(regexString);
-        if (!regexValid(pattern, telefone)) {
+        String patternTelefone = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$";
+        if (!regexValid(patternTelefone, telefone)) {
             return false;
         }
         return true;
     }
 
     public static boolean isValidRg(String rg) {
-        String regexString = "^[0-9]{2,3}\\.?[0-9]{2,3}\\.?[0-9]{3}\\-?[A-Za-z0-9]{1}$";
-        Pattern pattern = Pattern.compile(regexString);
-        if (!regexValid(pattern, rg)) {
+        String patternRg = "^[0-9]{2,3}\\.?[0-9]{2,3}\\.?[0-9]{3}\\-?[A-Za-z0-9]{1}$";
+        if (!regexValid(patternRg, rg)) {
             return false;
         }
         return true;
