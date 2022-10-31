@@ -10,7 +10,9 @@ import { DisciplinaService } from 'src/app/shared/services/disciplina/disciplina
 })
 export class DisciplinaComponent implements OnInit {
   disciplinas!:Disciplinas;
-  constructor(private disciplinasService:DisciplinaService, private route: ActivatedRoute) { }
+  constructor(
+      private disciplinasService:DisciplinaService,
+      private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getDisciplinas()

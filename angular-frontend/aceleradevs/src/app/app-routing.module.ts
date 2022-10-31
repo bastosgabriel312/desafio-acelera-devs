@@ -12,30 +12,30 @@ import { TurmaComponent } from './pages/turma/turma.component';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
+    path: '', component: HomeComponent, title: 'Home' 
   },
   {
-    path: 'aluno', component: AlunoComponent
+    path: 'aluno', component: AlunoComponent, title: 'Aluno' 
   },
   { 
-    path: 'aluno/:id', component: AlunoDetalhesComponent
+    path: 'aluno/:id', component: AlunoDetalhesComponent,title: 'Detalhes do Aluno' 
   },
   {
-    path: 'disciplina', component: DisciplinaComponent
+    path: 'disciplina', component: DisciplinaComponent, title: 'Disciplina' 
   },
   {
-    path: 'disciplina/:id', component: DisciplinaDetalhesComponent 
+    path: 'disciplina/:id', component: DisciplinaDetalhesComponent,title: 'Detalhes da Disciplina' 
   },
   {
-    path: 'curso', component: CursoComponent 
+    path: 'curso', component: CursoComponent, title: 'Curso' 
   },
   {
-    path: 'curso/:id', component: CursoDetalhesComponent 
+    path: 'curso/:id', component: CursoDetalhesComponent,title: 'Detalhes do Curso' 
   },
   {
-    path: 'turma', component: TurmaComponent   
+    path: 'turma', component: TurmaComponent, title: 'Turma'    
   },{
-    path: 'turma/:id', component: TurmaDetalhesComponent   
+    path: 'turma/:id', component: TurmaDetalhesComponent, title: 'Detalhes da Turma' 
   },
 ];
 

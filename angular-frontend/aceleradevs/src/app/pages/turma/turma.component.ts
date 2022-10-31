@@ -10,6 +10,7 @@ export class TurmaComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

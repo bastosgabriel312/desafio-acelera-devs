@@ -11,11 +11,13 @@ import { CursoService } from 'src/app/shared/services/curso/curso.service';
 })
 export class CursoComponent implements OnInit {
   cursos!:Cursos;
-  constructor(private cursosService:CursoService, private route: ActivatedRoute) { }
+  constructor(
+    private cursosService:CursoService,
+    private route: ActivatedRoute,
+    ) { }
 
   ngOnInit() {
     this.getCursos()
-    
   }
   getCursos(): void {
     this.cursosService.getCursos().pipe().subscribe(

@@ -3,6 +3,7 @@ import { Alunos } from 'src/app/shared/model/Aluno';
 import { AlunoService } from 'src/app/shared/services/aluno/aluno.service';
 import { ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-aluno',
   templateUrl: './aluno.component.html',

@@ -3,3 +3,7 @@
     border: none !important;
     background-color:white;
 }
+
+.btn.btn-info{
+    margin-left: 9.5vw;
+}
