@@ -144,7 +144,8 @@ public class AlunoDTO {
         this.endereco = endereco;
     }
 
-    public static boolean regexValid(Pattern pattern, String texto) {
+    public static boolean regexValid(String regex, String texto) {
+        Pattern pattern = Pattern.compile(regex);
         Matcher m = pattern.matcher(texto);
 
         if (m.find()) {
@@ -156,8 +157,7 @@ public class AlunoDTO {
 
     public static boolean isValidCep(String cep) {
         String regexCep = "^([\\d]{2})\\.?([\\d]{3})\\-?([\\d]{3})";
-        Pattern patternCep = Pattern.compile(regexCep);
-        if (!regexValid(patternCep, cep) || cep.length() > 9) {
+        if (!regexValid(regexCep, cep) || cep.length() > 9) {
             return false;
         }
         return true;
@@ -165,23 +165,18 @@ public class AlunoDTO {
 
     public static boolean isValidTelefone(String telefone) {
         String regexTelefone = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$";
-        Pattern patternTelefone = Pattern.compile(regexTelefone);
-        return regexValid(patternTelefone, telefone);
+        return regexValid(regexTelefone, telefone);
 
     }
 
     public static boolean isValidRg(String rg) {
         String regexRg = "^[0-9]{2,3}\\.?[0-9]{2,3}\\.?[0-9]{3}\\-?[A-Za-z0-9]{1}$";
-        Pattern patternRg = Pattern.compile(regexRg);
-        return regexValid(patternRg, rg);
+        return regexValid(regexRg, rg);
     }
 
     public static boolean isValidDadosPessoais(Aluno aluno) {
-        if (isValidRg(aluno.getDadosPessoais().getRg()) && isValidTelefone(aluno.getDadosPessoais().getTelefone())
-                && isValidCep(aluno.getDadosPessoais().getEndereco().getCep())) {
-            return true;
-        }
-        return false;
+        return isValidRg(aluno.getDadosPessoais().getRg()) && isValidTelefone(aluno.getDadosPessoais().getTelefone())
+                && isValidCep(aluno.getDadosPessoais().getEndereco().getCep());
     }
 
     public static List<AlunoDTO> converter(List<Aluno> alunos) {
