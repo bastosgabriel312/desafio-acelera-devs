@@ -38,7 +38,6 @@ public class DadosPessoaisService {
     
     public void deleteById(Long id) throws DadosPessoaisNotFoundException {
         DadosPessoais dadosPessoais = findById(id);
-        System.out.println(dadosPessoais.getEndereco().toString());
         Endereco endereco = enderecoRepository.findById(dadosPessoais.getEndereco().getId()).get();
         enderecoRepository.deleteById(endereco.getId());
         dadosPessoaisRepository.delete(dadosPessoais);

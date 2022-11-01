@@ -90,7 +90,7 @@ public class CursoController {
 	public ResponseEntity<?> remover(@PathVariable Long id) {
 		try {
 			Curso curso = cursoService.findById(id);
-			cursoService.deleteById(curso.getId());;
+			cursoService.deleteById(curso.getId());
 			return ResponseEntity.ok().build();
 		} catch (CursoNotFoundException e) {
 		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

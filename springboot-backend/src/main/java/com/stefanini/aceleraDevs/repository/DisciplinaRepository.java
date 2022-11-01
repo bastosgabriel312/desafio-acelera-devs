@@ -13,9 +13,9 @@ import com.stefanini.aceleraDevs.model.Turma;
 public interface DisciplinaRepository extends JpaRepository <Disciplina, Long> {
 
 	@Query("SELECT SUM(d.totalHoras) FROM Disciplina d WHERE d.curso = :curso")
-	public Integer findTotalHorasByCurso(@Param(value = "curso") Curso curso);
+	Integer findTotalHorasByCurso(@Param(value = "curso") Curso curso);
 	
-	public List<Disciplina> findAllByCurso(@Param(value = "curso") Curso curso);
-	public List<Disciplina> findAllByTurma(@Param(value = "turma") Turma turma);
+	List<Disciplina> findAllByCurso(@Param(value = "curso") Curso curso);
+	List<Disciplina> findAllByTurma(@Param(value = "turma") Turma turma);
     
 }

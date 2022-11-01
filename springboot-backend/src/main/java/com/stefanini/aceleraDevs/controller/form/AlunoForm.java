@@ -1,8 +1,13 @@
 package com.stefanini.aceleraDevs.controller.form;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.stefanini.aceleraDevs.dto.AlunoDTO;
+import com.stefanini.aceleraDevs.exception.DadosPessoaisInvalidosException;
+import com.stefanini.aceleraDevs.exception.TurmaNaoCondizComDisciplinasDoCursoException;
 import com.stefanini.aceleraDevs.model.Aluno;
 import com.stefanini.aceleraDevs.model.Curso;
 import com.stefanini.aceleraDevs.model.DadosPessoais;
@@ -13,105 +18,94 @@ import com.stefanini.aceleraDevs.service.CursoService;
 import com.stefanini.aceleraDevs.service.TurmaService;
 
 public class AlunoForm {
-	@NotNull
+    @NotNull
     private String nome;
-	@NotNull
+    @NotNull
     private String matricula;
-	@NotNull
+    @CPF
     private String cpf;
-	@NotNull
+    @Email
     private String email;
-	@NotNull
-	private String telefone;
-	@NotNull
-	private String rg;
-	@NotNull
+    @NotNull
+    private String telefone;
+    @NotNull
+    private String rg;
+    @NotNull
     private Long idTurma;
-	@NotNull
-	private Long idCurso;
-	@NotNull
-	private Endereco endereco;
-	
-	
-	public String getNome() {
-		return nome;
-	}
+    @NotNull
+    private Long idCurso;
+    @NotNull
+    private Endereco endereco;
 
+    public String getNome() {
+        return nome;
+    }
 
-	public String getMatricula() {
-		return matricula;
-	}
+    public String getMatricula() {
+        return matricula;
+    }
 
+    public String getCpf() {
+        return cpf;
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    public String getEmail() {
+        return email;
+    }
 
+    public String getTelefone() {
+        return telefone;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getRg() {
+        return rg;
+    }
 
+    public Long getIdTurma() {
+        return idTurma;
+    }
 
-	public String getTelefone() {
-		return telefone;
-	}
-
-
-	public String getRg() {
-		return rg;
-	}
-
-
-	public Long getIdTurma() {
-		return idTurma;
-	}
-
-
-	public Long getIdCurso() {
+    public Long getIdCurso() {
         return idCurso;
     }
 
-
     public Endereco getEndereco() {
-		return endereco;
-	}
+        return endereco;
+    }
 
+    public Aluno atualizar(Long id, AlunoService alunoService, TurmaService turmaService, CursoService cursoService)
+            throws Exception {
+        Aluno aluno = alunoService.findById(id);
+        DadosPessoais dadosPessoais = aluno.getDadosPessoais();
+        Turma turma = turmaService.findById(idTurma);
+        Curso curso = cursoService.findById(idCurso);
 
-	public Aluno atualizar(Long id, AlunoService alunoService, TurmaService turmaService, CursoService cursoService) throws Exception {
-		Aluno aluno = alunoService.findById(id);
-		DadosPessoais dadosPessoais = aluno.getDadosPessoais();
-		Turma turma = turmaService.findById(idTurma);
-		Curso curso = cursoService.findById(idCurso);
-		aluno.setNome(this.nome);
         dadosPessoais.setCpf(this.cpf);
         dadosPessoais.setEmail(this.email);
         dadosPessoais.setRg(rg);
         dadosPessoais.setTelefone(telefone);
         dadosPessoais.setEndereco(endereco);
+
         aluno.setDadosPessoais(dadosPessoais);
+        aluno.setNome(this.nome);
         aluno.setMatricula(this.matricula);
-        
         aluno.setTurma(turma);
-        
         aluno.setCurso(curso);
-        
-		if (!AlunoDTO.isValidDadosPessoais(aluno)) {
-		    throw new Exception("Dados pessoais inválidos.");
-		}
+        if (!AlunoDTO.isValidDadosPessoais(aluno)) {
+            throw new DadosPessoaisInvalidosException();
+        }
         if (!(alunoService.disciplinasInCurso(aluno))) {
-            throw new Exception("As disciplinas da turma do aluno não condizem com as disciplinas do curso.");
+            throw new TurmaNaoCondizComDisciplinasDoCursoException();
         }
         alunoService.save(aluno);
-		return aluno;
-	}
-	
-	
-	@Override
+        return aluno;
+    }
+
+    @Override
     public String toString() {
         return "AlunoForm [nome=" + nome + ", matricula=" + matricula + ", cpf=" + cpf + ", email=" + email
                 + ", telefone=" + telefone + ", rg=" + rg + ", idTurma=" + idTurma + ", idCurso=" + idCurso
                 + ", endereco=" + endereco + "]";
     }
-	
+
 }

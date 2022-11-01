@@ -144,9 +144,8 @@ public class AlunoDTO {
         this.endereco = endereco;
     }
 
-    public static boolean regexValid(String pattern, String texto) {
-        Pattern r = Pattern.compile(pattern);
-        Matcher m = r.matcher(texto);
+    public static boolean regexValid(Pattern pattern, String texto) {
+        Matcher m = pattern.matcher(texto);
 
         if (m.find()) {
             return true;
@@ -156,7 +155,8 @@ public class AlunoDTO {
     }
 
     public static boolean isValidCep(String cep) {
-        String patternCep = "^([\\d]{2})\\.?([\\d]{3})\\-?([\\d]{3})";
+        String regexCep = "^([\\d]{2})\\.?([\\d]{3})\\-?([\\d]{3})";
+        Pattern patternCep = Pattern.compile(regexCep);
         if (!regexValid(patternCep, cep) || cep.length() > 9) {
             return false;
         }
@@ -164,19 +164,16 @@ public class AlunoDTO {
     }
 
     public static boolean isValidTelefone(String telefone) {
-        String patternTelefone = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$";
-        if (!regexValid(patternTelefone, telefone)) {
-            return false;
-        }
-        return true;
+        String regexTelefone = "^\\(?[1-9]{2}\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$";
+        Pattern patternTelefone = Pattern.compile(regexTelefone);
+        return regexValid(patternTelefone, telefone);
+
     }
 
     public static boolean isValidRg(String rg) {
-        String patternRg = "^[0-9]{2,3}\\.?[0-9]{2,3}\\.?[0-9]{3}\\-?[A-Za-z0-9]{1}$";
-        if (!regexValid(patternRg, rg)) {
-            return false;
-        }
-        return true;
+        String regexRg = "^[0-9]{2,3}\\.?[0-9]{2,3}\\.?[0-9]{3}\\-?[A-Za-z0-9]{1}$";
+        Pattern patternRg = Pattern.compile(regexRg);
+        return regexValid(patternRg, rg);
     }
 
     public static boolean isValidDadosPessoais(Aluno aluno) {

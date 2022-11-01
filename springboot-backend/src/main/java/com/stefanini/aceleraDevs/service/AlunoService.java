@@ -3,6 +3,8 @@ package com.stefanini.aceleraDevs.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.stereotype.Service;
 
 import com.stefanini.aceleraDevs.exception.AlunoNotFoundException;
@@ -36,16 +38,17 @@ public class AlunoService {
         return alunoRepository.findById(id).orElseThrow(() -> new AlunoNotFoundException(id));
     }
 
-    public Aluno save(Aluno aluno) {
+    public Aluno save(Aluno aluno) throws ConstraintViolationException {
         return alunoRepository.save(aluno);
     }
 
     // Verifica se as disciplinas condizem com o curso que o aluno está matriculado.
     public boolean disciplinasInCurso(Aluno aluno) {
-        if (!(aluno == null)) {
+        if (aluno == null) {
+            return false;
+        }else {
             return this.disciplinasTurmaInCurso(aluno.getTurma(),aluno.getCurso());
         }
-        return false;
     }
     
     public boolean disciplinasTurmaInCurso(Turma turma, Curso curso) {

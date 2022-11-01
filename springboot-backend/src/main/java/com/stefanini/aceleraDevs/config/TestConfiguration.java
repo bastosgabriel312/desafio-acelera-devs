@@ -45,7 +45,7 @@ public class TestConfiguration {
                     "joao@gmail.com",
                     "11997777777",
                     "385208510",
-                    new Endereco(null,"Rua Santos","10","Mauá","São Paulo","09450000")
+                    new Endereco(null,"Rua Santos","10","Mauá","SP","09450000")
                     );
             Aluno joao = new Aluno(null,
                     "Joao",

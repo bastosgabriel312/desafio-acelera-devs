@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,19 +64,19 @@ public class AlunoController {
             throws TurmaNotFoundException, CursoNotFoundException {
         try {
             Aluno newAluno = alunoDTOService.mapAluno(aluno);
-
             if (!AlunoDTO.isValidDadosPessoais(newAluno))
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Dados pessoais inválidos.");
             if (!alunoService.disciplinasInCurso(newAluno))
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("As disciplinas da turma do aluno não condizem com as disciplinas do curso");
-
             Aluno alunoSaved = alunoService.save(newAluno);
             URI uri = uriBuilder.path("/aluno/{id}").buildAndExpand(alunoSaved.getId()).toUri();
             return ResponseEntity.created(uri).body(new AlunoDTO(alunoSaved));
         } catch (ConstraintViolationException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Número do registro de contribuinte individual brasileiro (CPF) inválido");
-        } 
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getConstraintViolations().stream().map(c->c.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
@@ -92,7 +93,7 @@ public class AlunoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateAluno(@PathVariable Long id, @RequestBody @Valid AlunoForm alunoForm)
-            throws CursoNotFoundException, DisciplinaNotFoundException, AlunoNotFoundException {
+            throws CursoNotFoundException, DisciplinaNotFoundException, AlunoNotFoundException, MethodArgumentNotValidException {
         try {
             Aluno alunoUpdated = alunoForm.atualizar(id, alunoService, turmaService, cursoService);
             return ResponseEntity.ok(new AlunoDTO(alunoUpdated));
