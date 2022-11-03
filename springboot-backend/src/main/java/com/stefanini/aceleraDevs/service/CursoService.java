@@ -32,7 +32,11 @@ public class CursoService {
     }
     
     public Curso updateTotalHoras(Integer totalHoras, Curso curso) throws CursoNotFoundException {
-    	curso.setTotalGrade(totalHoras);
+        if (totalHoras==null) {
+            curso.setTotalGrade(0);
+        }else {
+            curso.setTotalGrade(totalHoras);
+        }
     	cursoRepository.save(curso);
     	return curso;
     }

@@ -3,6 +3,7 @@ package com.stefanini.aceleraDevs.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.stefanini.aceleraDevs.model.Curso;
@@ -14,6 +15,7 @@ public class CursoDTO {
 	@NotNull
     private String name;
 	@NotNull
+	@Min(value = 0)
     private Integer totalGrade;
 
 
@@ -22,7 +24,7 @@ public class CursoDTO {
 
     public CursoDTO(String name, Integer totalGrade,Long id) {
         this.name = name;
-        this.totalGrade = totalGrade;
+        this.totalGrade = 0;
         this.id = id;
     }
 

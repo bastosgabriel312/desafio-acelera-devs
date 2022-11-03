@@ -22,7 +22,7 @@ public class AlunoForm {
     private String nome;
     @NotNull
     private String matricula;
-    @CPF
+    @CPF(message="CPF inválido.")
     private String cpf;
     @Email
     private String email;

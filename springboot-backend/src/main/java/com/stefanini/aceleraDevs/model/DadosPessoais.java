@@ -26,7 +26,7 @@ public class DadosPessoais {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@CPF
+	@CPF(message="CPF inválido.")
 	private String cpf;
 
 	@Email
