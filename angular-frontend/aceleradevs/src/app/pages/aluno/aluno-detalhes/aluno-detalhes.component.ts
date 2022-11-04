@@ -46,7 +46,6 @@ export class AlunoDetalhesComponent implements OnInit {
     this.alunosService.getAlunoById(Number(id)).subscribe(
       (aluno) => {
         this.aluno = aluno;
-        console.log(this.aluno)
         this.message ={'status':200};
         this.editarForm.setValue({
           nome: aluno.nome,
@@ -60,16 +59,24 @@ export class AlunoDetalhesComponent implements OnInit {
           cidade: aluno.endereco.cidade,
           estado: aluno.endereco.estado,
           cep: aluno.endereco.cep,
-          turma: String(aluno.turma.id),
-          curso: String(aluno.curso.id),
-        })
-        ;
-
+          turma:"",
+          curso:"",
+        });
       },
       (error: Error) => {
         this.message = error;
       }
     );
+  }
+
+  turmasContainsTurmaAluno(){
+    if(this.aluno!== null && this.turmas!= null){
+      const found = this.turmas.find((turma)=> {
+        return turma.id == this.aluno.turma.id;
+      })
+      return found !==undefined;
+    } return false
+
   }
 
   getTurmas(): void {
@@ -82,22 +89,24 @@ export class AlunoDetalhesComponent implements OnInit {
       });
     }
 
-  getTurmasComDisciplinasInCurso(idCurso:number): void {
-    this.alunosService.getTurmasComDisciplinasInCurso(idCurso).subscribe(
-      (turmas) => {
-        this.turmas = turmas;
-        this.editarForm.controls.turma.setErrors(null);
-      },
-      (error: Error)=>{
-        this.message = error;
-        this.turmas = [];
-        this.editarForm.controls.turma.setErrors(Validators.required);
-        this.alertService.showAlert("Não há turma disponível que condiz com curso escolhido, por favor verifique as disciplinas das turmas.",AlertTypes.INFO)
-
-      }
-    )
-
-  }
+    getTurmasComDisciplinasInCurso(idCurso:number): void {
+      this.alunosService.getTurmasComDisciplinasInCurso(idCurso).subscribe(
+        (turmas) => {
+          this.turmas = turmas;
+          if(this.turmas.length === 0){
+            this.editarForm.controls.turma.setErrors(Validators.required)
+            this.alertService.showAlert("Não há turma disponível que condiz com curso escolhido, por favor verifique as disciplinas das turmas.",AlertTypes.INFO)
+          } else{
+            this.editarForm.controls.turma.setErrors(null)};
+        },
+        (error: Error)=>{
+          this.message = error;
+          this.turmas = [];
+          this.editarForm.controls.turma.setErrors(Validators.required);
+        }
+      )
+  
+    }
   
   getCursos(): void {
     this.cursoService.getCursos().subscribe(
@@ -112,7 +121,7 @@ export class AlunoDetalhesComponent implements OnInit {
   
   habilitarForm(){
     this.editarForm.enable();
-    console.log(this.turmas)
+    this.editarForm.controls.turma.value?.length==0?this.editarForm.controls.turma.setErrors(Validators.required):this.editarForm.controls.turma.valid;
   }
 
   onSubmit(): void {
@@ -135,7 +144,6 @@ export class AlunoDetalhesComponent implements OnInit {
     if(confirm("Confirme caso deseje realmente remover")){
       this.alunosService.deleteAluno(this.aluno.id).subscribe(
         (mensagem:any) =>{
-          console.warn(mensagem);
           this.alertService.showAlert("Aluno removido com sucesso",
           AlertTypes.SUCCESS)
           this.router.navigate(['/aluno'])

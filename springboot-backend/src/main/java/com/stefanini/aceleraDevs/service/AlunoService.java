@@ -1,5 +1,6 @@
 package com.stefanini.aceleraDevs.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,14 +55,19 @@ public class AlunoService {
     public boolean disciplinasTurmaInCurso(Turma turma, Curso curso) {
         List<Long> disciplinasCurso = disciplinaService.findAllByCurso(curso).stream().map(d->d.getId()).collect(Collectors.toList());
         List<Long> disciplinasTurma = disciplinaService.findAllByTurma(turma).stream().map(d->d.getId()).collect(Collectors.toList());
-        return disciplinasCurso.containsAll(disciplinasTurma);
+        disciplinasTurma.forEach(d->System.out.println("D TURMA: "+d));
+        System.out.println(disciplinasTurma);
+        return !disciplinasTurma.isEmpty()?disciplinasCurso.containsAll(disciplinasTurma):false;
     }
 
     // Retorna lista de turmas se as disciplinas condizem com o curso que o aluno está matriculado.
     public List<Turma> listaDisciplinasInCurso(Curso curso) {
         List<Turma> turmas = turmaService.findAllTurmas();
-        List<Turma> turmasAdequadas = turmas.stream()
-                .map(t->this.disciplinasTurmaInCurso(t,curso)? t:null).collect(Collectors.toList());
+        ArrayList<Turma> turmasAdequadas = new ArrayList<Turma>() ;
+        
+        turmas.forEach((t)->{if (this.disciplinasTurmaInCurso(t,curso)) {
+           turmasAdequadas.add(t);
+            }});
         return turmasAdequadas;
     }
 

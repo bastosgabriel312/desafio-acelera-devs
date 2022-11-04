@@ -38,7 +38,7 @@ public class TestConfiguration {
             
             Curso curso = new Curso(null, "medicina",
                     new ArrayList<Disciplina>(),
-                    370,null);
+                    80,null);
             cursoRepository.save(curso);
             DadosPessoais dadosPessoais = new DadosPessoais(null,
                     "98603077096",

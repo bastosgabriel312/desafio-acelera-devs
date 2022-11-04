@@ -57,14 +57,16 @@ export class FormModalComponent implements OnInit {
     this.alunoService.getTurmasComDisciplinasInCurso(idCurso).subscribe(
       (turmas) => {
         this.turmas = turmas;
-        this.form.controls.turma.setErrors(null);
+        if(this.turmas.length === 0){
+          this.form.controls.turma.setErrors(Validators.required)
+          this.alertService.showAlert("Não há turma disponível que condiz com curso escolhido, por favor verifique as disciplinas das turmas.",AlertTypes.INFO)
+        } else{
+          this.form.controls.turma.setErrors(null)};
       },
       (error: Error)=>{
         this.message = error;
         this.turmas = [];
         this.form.controls.turma.setErrors(Validators.required);
-        this.alertService.showAlert("Não há turma disponível que condiz com curso escolhido, por favor verifique as disciplinas das turmas.",AlertTypes.INFO)
-
       }
     )
 
@@ -93,7 +95,6 @@ export class FormModalComponent implements OnInit {
         },
         (error: Error) => {
           this.message = error;
-          console.warn(this.message);
           
           this.alertService.showAlert(this.message.error,
             AlertTypes.DANGER);

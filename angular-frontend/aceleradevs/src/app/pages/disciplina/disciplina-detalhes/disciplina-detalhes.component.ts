@@ -114,14 +114,12 @@ export class DisciplinaDetalhesComponent implements OnInit {
     if(confirm("Confirme caso deseje realmente remover")){
       this.disciplinasService.deleteDisciplina(this.disciplina.id).subscribe(
         (mensagem:any) =>{
-          console.warn(mensagem);
           this.alertService.showAlert("Disciplina removida com sucesso",
           AlertTypes.SUCCESS)
           this.router.navigate(['/disciplina'])
         },
         (error: Error) => {
           this.message = error;
-          console.log(this.editarForm);
           this.alertService.showAlert(this.message.error,
             AlertTypes.DANGER);
         });

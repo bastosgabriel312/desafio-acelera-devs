@@ -34,7 +34,6 @@ export class TurmaDetalhesComponent implements OnInit {
   getTurmaById(id: string | null): void {
     this.turmaService.getTurmaById(Number(id)).subscribe(
       (turma) => {
-        console.log(turma);
         this.turma = turma;
         this.message ={'status':200};
         this.editarForm.setValue({
@@ -67,7 +66,6 @@ export class TurmaDetalhesComponent implements OnInit {
             },
             (error: Error) => {
               this.message = error;
-              console.warn(error)
               this.turmaService.convertFormToTurma(this.editarForm.value)
               this.alertService.showAlert(this.message.error,
                 AlertTypes.DANGER);
@@ -79,14 +77,12 @@ export class TurmaDetalhesComponent implements OnInit {
      if(confirm("Confirme caso deseje realmente remover")){
       this.turmaService.deleteTurma(this.turma.id).subscribe(
         (mensagem:any) =>{
-          console.warn(mensagem);
           this.alertService.showAlert("Turma removida com sucesso",
           AlertTypes.SUCCESS)
           this.router.navigate(['/turma'])
         },
         (error: Error) => {
           this.message = error;
-          console.log(this.editarForm);
           this.alertService.showAlert(this.message.error,
             AlertTypes.DANGER);
         });

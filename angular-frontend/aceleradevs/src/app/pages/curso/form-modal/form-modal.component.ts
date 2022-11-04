@@ -48,7 +48,6 @@ export class FormModalComponent implements OnInit {
         },
         (error: Error) => {
           this.message = error;
-          console.warn(this.message);
           this.form.controls.totalGrade.disable()
           this.alertService.showAlert(this.message.error,
             AlertTypes.DANGER);

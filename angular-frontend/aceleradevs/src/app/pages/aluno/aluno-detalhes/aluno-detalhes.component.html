@@ -70,7 +70,13 @@
         <div class="form-group col-md-6">
           <mat-form-field appearance="fill">
             <mat-label>Turma</mat-label>
-            <mat-select [(ngModel)]="aluno.turma.id" formControlName="turma">
+            <!-- Se na lista de turmas do curso conter a turma do aluno seleciona a turma -->
+            <mat-select *ngIf="this.turmasContainsTurmaAluno()" [(ngModel)]="aluno.turma.id" formControlName="turma">
+              <mat-option *ngFor="let turmaOption of turmas" [value]="turmaOption.id" >{{turmaOption.nome}}</mat-option>
+            </mat-select>
+            <!-- Se na lista de turmas do curso conter a turma do aluno seleciona a turma senão -->
+            <mat-select *ngIf="!this.turmasContainsTurmaAluno()" ngModel="" formControlName="turma">
+              <mat-option>Escolha...</mat-option>
               <mat-option *ngFor="let turmaOption of turmas" [value]="turmaOption.id" >{{turmaOption.nome}}</mat-option>
             </mat-select>
             <mat-hint align="end">Selecione uma turma</mat-hint>

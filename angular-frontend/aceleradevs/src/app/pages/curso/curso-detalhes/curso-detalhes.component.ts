@@ -36,7 +36,6 @@ export class CursoDetalhesComponent implements OnInit {
   getCursoById(id: string | null): void {
     this.cursoService.getCursoById(Number(id)).subscribe(
       (curso) => {
-        console.log(curso);
         this.curso = curso;
         this.message ={'status':200};
         this.editarForm.setValue({
@@ -64,7 +63,6 @@ export class CursoDetalhesComponent implements OnInit {
 
   onSubmit(): void {
     if(this.editarForm.valid){
-      console.log(this.editarForm.value)
         this.editarForm.enable();
         this.cursoService.updateCurso(this.curso.id,this.cursoService.convertFormToCurso(this.editarForm.value)).subscribe(
            (curso) =>{
@@ -75,7 +73,6 @@ export class CursoDetalhesComponent implements OnInit {
            (error: Error) => {
             this.editarForm.disable();
              this.message = error;
-             console.warn(error)
              this.cursoService.convertFormToCurso(this.editarForm.value)
              this.alertService.showAlert(this.message.error,
                AlertTypes.DANGER);
@@ -87,14 +84,12 @@ export class CursoDetalhesComponent implements OnInit {
      if(confirm("Confirme caso deseje realmente remover")){
        this.cursoService.deleteCurso(this.curso.id).subscribe(
         (mensagem:any) =>{
-          console.warn(mensagem);
           this.alertService.showAlert("Curso removido com sucesso",
           AlertTypes.SUCCESS)
           this.router.navigate(['/curso'])
         },
         (error: Error) => {
           this.message = error;
-          console.log(this.editarForm);
           this.alertService.showAlert(this.message.error,
             AlertTypes.DANGER);
         });
