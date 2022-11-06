@@ -36,7 +36,7 @@ public class TestConfiguration {
             turma.setNome("MD1A");
             turmaRepository.save(turma);
             
-            Curso curso = new Curso(null, "medicina",
+            Curso curso = new Curso(null, "Medicina",
                     new ArrayList<Disciplina>(),
                     80,null);
             cursoRepository.save(curso);

@@ -55,8 +55,6 @@ public class AlunoService {
     public boolean disciplinasTurmaInCurso(Turma turma, Curso curso) {
         List<Long> disciplinasCurso = disciplinaService.findAllByCurso(curso).stream().map(d->d.getId()).collect(Collectors.toList());
         List<Long> disciplinasTurma = disciplinaService.findAllByTurma(turma).stream().map(d->d.getId()).collect(Collectors.toList());
-        disciplinasTurma.forEach(d->System.out.println("D TURMA: "+d));
-        System.out.println(disciplinasTurma);
         return !disciplinasTurma.isEmpty()?disciplinasCurso.containsAll(disciplinasTurma):false;
     }
 
