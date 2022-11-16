@@ -5,10 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.stefanini.aceleraDevs.exception.CursoNotFoundException;
 import com.stefanini.aceleraDevs.exception.TurmaNotFoundException;
-import com.stefanini.aceleraDevs.model.Curso;
-import com.stefanini.aceleraDevs.model.Disciplina;
 import com.stefanini.aceleraDevs.model.Turma;
 import com.stefanini.aceleraDevs.repository.TurmaRepository;
 

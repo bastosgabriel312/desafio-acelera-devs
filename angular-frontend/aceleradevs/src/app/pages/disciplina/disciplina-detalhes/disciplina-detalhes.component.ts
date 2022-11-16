@@ -64,6 +64,9 @@ export class DisciplinaDetalhesComponent implements OnInit {
     this.turmaService.getTurmas().subscribe(
       (turmas) =>{
         this.turmas = turmas;
+        if(this.turmas.length === 0){
+          this.editarForm.controls.turma.setErrors(Validators.required)
+        }
       },
       (error: Error) => {
         this.message = error;
@@ -82,6 +85,8 @@ export class DisciplinaDetalhesComponent implements OnInit {
   
   habilitarForm(){
     this.editarForm.enable();
+    this.editarForm.controls.turma.value?.length==0?this.editarForm.controls.turma.setErrors(Validators.required):this.editarForm.controls.turma.valid;
+    this.editarForm.controls.curso.value?.length==0?this.editarForm.controls.curso.setErrors(Validators.required):this.editarForm.controls.curso.valid;
   }
 
   editarForm = this.formBuilder.group({

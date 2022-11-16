@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.stefanini.aceleraDevs.mapper.AlunoDTOService;
 import com.stefanini.aceleraDevs.model.Aluno;
 import com.stefanini.aceleraDevs.model.Curso;
 import com.stefanini.aceleraDevs.model.Endereco;

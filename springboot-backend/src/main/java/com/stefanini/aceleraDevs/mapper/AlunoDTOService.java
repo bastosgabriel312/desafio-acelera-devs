@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stefanini.aceleraDevs.controller.form.AlunoForm;
-import com.stefanini.aceleraDevs.dto.AlunoDTO;
 import com.stefanini.aceleraDevs.exception.CursoNotFoundException;
 import com.stefanini.aceleraDevs.exception.TurmaNotFoundException;
 import com.stefanini.aceleraDevs.model.Aluno;

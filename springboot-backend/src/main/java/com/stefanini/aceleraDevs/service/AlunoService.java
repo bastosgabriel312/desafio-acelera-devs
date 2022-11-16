@@ -61,7 +61,7 @@ public class AlunoService {
     // Retorna lista de turmas se as disciplinas condizem com o curso que o aluno está matriculado.
     public List<Turma> listaDisciplinasInCurso(Curso curso) {
         List<Turma> turmas = turmaService.findAllTurmas();
-        ArrayList<Turma> turmasAdequadas = new ArrayList<Turma>() ;
+        ArrayList<Turma> turmasAdequadas = new ArrayList<Turma>();
         
         turmas.forEach((t)->{if (this.disciplinasTurmaInCurso(t,curso)) {
            turmasAdequadas.add(t);

@@ -45,16 +45,28 @@
       <div class="form-group col-md-3">  
         <mat-form-field appearance="fill">
           <mat-label>Curso</mat-label>
-          <mat-select [(ngModel)]="disciplina.curso.id" formControlName="curso" >
+          <mat-select *ngIf="this.cursos?.length!=0" [(ngModel)]="disciplina.curso.id" formControlName="curso" >
             <mat-option *ngFor="let cursoOption of cursos" [value]="cursoOption.id">{{cursoOption.name}}</mat-option>
           </mat-select>
+          <!-- Se não existirem cursos  -->
+          <mat-select *ngIf="this.cursos?.length==0" ngModel="" formControlName="curso">
+            <mat-option>Escolha...</mat-option>
+            <mat-option *ngFor="let cursoOption of cursos" [value]="cursoOption.id">{{cursoOption.name}}</mat-option>
+          </mat-select>
+                
           <mat-hint align="end">Selecione um curso.</mat-hint>
         </mat-form-field>
       </div>
       <div class="form-group col-md-3">
         <mat-form-field appearance="fill">
           <mat-label>Turma</mat-label>
-          <mat-select [(ngModel)]="disciplina.turma.id" formControlName="turma">
+          <!-- Se existirem turmas  -->
+          <mat-select *ngIf="this.turmas?.length!=0"[(ngModel)]="disciplina.turma.id" formControlName="turma">
+            <mat-option *ngFor="let turmaOption of turmas" [value]="turmaOption.id" >{{turmaOption.nome}}</mat-option>
+          </mat-select>
+          <!-- Se não existirem turmas  -->
+          <mat-select *ngIf="this.turmas?.length==0" ngModel="" formControlName="turma">
+            <mat-option>Escolha...</mat-option>
             <mat-option *ngFor="let turmaOption of turmas" [value]="turmaOption.id" >{{turmaOption.nome}}</mat-option>
           </mat-select>
           <mat-hint align="end">Selecione uma turma</mat-hint>
